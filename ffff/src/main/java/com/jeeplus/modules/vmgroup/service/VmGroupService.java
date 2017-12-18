@@ -16,7 +16,7 @@ import com.jeeplus.modules.vmgroup.dao.VmGroupDao;
 /**
  * 售货机分组Service
  * @author Jason Dong
- * @version 2017-12-12
+ * @version 2017-12-18
  */
 @Service
 @Transactional(readOnly = true)

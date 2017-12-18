@@ -1,0 +1,175 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.jeeplus.modules.order.dao.OrderDao">
+    
+	<sql id="orderColumns">
+		a.id AS "id",
+		a.create_by AS "createBy.id",
+		a.create_date AS "createDate",
+		a.update_by AS "updateBy.id",
+		a.update_date AS "updateDate",
+		a.remarks AS "remarks",
+		a.del_flag AS "delFlag",
+		a.order_no AS "orderNo",
+		a.out_order_no AS "outOrderNo",
+		a.type AS "type",
+		a.state AS "state",
+		a.customer_id AS "customer.id",
+		a.purchase_time AS "purchaseTime",
+		a.source AS "source",
+		a.vm_id AS "vendingMachine.id",
+		a.reader_no AS "reader_no",
+		a.origin_total_price AS "originTotalPrice",
+		a.cut AS "cut",
+		a.voucher AS "voucher",
+		a.pay_price AS "payPrice",
+		a.unit_price AS "unitPrice",
+		a.amount AS "amount",
+		a.rfid_state AS "rfidState"
+	</sql>
+	
+	<sql id="orderJoins">
+	</sql>
+	
+    
+	<select id="get" resultType="Order" >
+		SELECT 
+			<include refid="orderColumns"/>
+		FROM t_order a
+		<include refid="orderJoins"/>
+		WHERE a.id = #{id}
+	</select>
+	
+	<select id="findList" resultType="Order" >
+		SELECT 
+			<include refid="orderColumns"/>
+		FROM t_order a
+		<include refid="orderJoins"/>
+		<where>
+			a.del_flag = #{DEL_FLAG_NORMAL}
+		</where>
+		<choose>
+			<when test="page !=null and page.orderBy != null and page.orderBy != ''">
+				ORDER BY ${page.orderBy}
+			</when>
+			<otherwise>
+				ORDER BY a.update_date DESC
+			</otherwise>
+		</choose>
+	</select>
+	
+	<select id="findAllList" resultType="Order" >
+		SELECT 
+			<include refid="orderColumns"/>
+		FROM t_order a
+		<include refid="orderJoins"/>
+		<where>
+			a.del_flag = #{DEL_FLAG_NORMAL}
+		</where>		
+		<choose>
+			<when test="page !=null and page.orderBy != null and page.orderBy != ''">
+				ORDER BY ${page.orderBy}
+			</when>
+			<otherwise>
+				ORDER BY a.update_date DESC
+			</otherwise>
+		</choose>
+	</select>
+	
+	<insert id="insert">
+		INSERT INTO t_order(
+			id,
+			create_by,
+			create_date,
+			update_by,
+			update_date,
+			remarks,
+			del_flag,
+			order_no,
+			out_order_no,
+			type,
+			state,
+			customer_id,
+			purchase_time,
+			source,
+			vm_id,
+			reader_no,
+			origin_total_price,
+			cut,
+			voucher,
+			pay_price,
+			unit_price,
+			amount,
+			rfid_state
+		) VALUES (
+			#{id},
+			#{createBy.id},
+			#{createDate},
+			#{updateBy.id},
+			#{updateDate},
+			#{remarks},
+			#{delFlag},
+			#{orderNo},
+			#{outOrderNo},
+			#{type},
+			#{state},
+			#{customer.id},
+			#{purchaseTime},
+			#{source},
+			#{vendingMachine.id},
+			#{reader_no},
+			#{originTotalPrice},
+			#{cut},
+			#{voucher},
+			#{payPrice},
+			#{unitPrice},
+			#{amount},
+			#{rfidState}
+		)
+	</insert>
+	
+	<update id="update">
+		UPDATE t_order SET 	
+			update_by = #{updateBy.id},
+			update_date = #{updateDate},
+			remarks = #{remarks},
+			order_no = #{orderNo},
+			out_order_no = #{outOrderNo},
+			type = #{type},
+			state = #{state},
+			customer_id = #{customer.id},
+			purchase_time = #{purchaseTime},
+			source = #{source},
+			vm_id = #{vendingMachine.id},
+			reader_no = #{reader_no},
+			origin_total_price = #{originTotalPrice},
+			cut = #{cut},
+			voucher = #{voucher},
+			pay_price = #{payPrice},
+			unit_price = #{unitPrice},
+			amount = #{amount},
+			rfid_state = #{rfidState}
+		WHERE id = #{id}
+	</update>
+	
+	
+	<!--物理删除-->
+	<update id="delete">
+		DELETE FROM t_order
+		WHERE id = #{id}
+	</update>
+	
+	<!--逻辑删除-->
+	<update id="deleteByLogic">
+		UPDATE t_order SET 
+			del_flag = #{DEL_FLAG_DELETE}
+		WHERE id = #{id}
+	</update>
+	
+	
+	<!-- 根据实体名称和字段名称和字段值获取唯一记录 -->
+	<select id="findUniqueByProperty" resultType="Order" statementType="STATEMENT">
+		select * FROM t_order  where ${propertyName} = '${value}'
+	</select>
+	
+</mapper>

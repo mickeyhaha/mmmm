@@ -1,0 +1,151 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.jeeplus.modules.refund.dao.RefundDao">
+    
+	<sql id="refundColumns">
+		a.id AS "id",
+		a.create_by AS "createBy.id",
+		a.create_date AS "createDate",
+		a.update_by AS "updateBy.id",
+		a.update_date AS "updateDate",
+		a.remarks AS "remarks",
+		a.del_flag AS "delFlag",
+		a.refund_no AS "refundNo",
+		a.customer_id AS "customer.id",
+		a.order_id AS "order.id",
+		a.order_amount AS "orderAmount",
+		a.apply_amount AS "applyAmount",
+		a.refund_amount AS "refundAmount",
+		a.reason AS "reason",
+		a.attachment AS "attachment",
+		a.state AS "state",
+		a.apply_time AS "applyTime"
+	</sql>
+	
+	<sql id="refundJoins">
+	</sql>
+	
+    
+	<select id="get" resultType="Refund" >
+		SELECT 
+			<include refid="refundColumns"/>
+		FROM t_refund a
+		<include refid="refundJoins"/>
+		WHERE a.id = #{id}
+	</select>
+	
+	<select id="findList" resultType="Refund" >
+		SELECT 
+			<include refid="refundColumns"/>
+		FROM t_refund a
+		<include refid="refundJoins"/>
+		<where>
+			a.del_flag = #{DEL_FLAG_NORMAL}
+		</where>
+		<choose>
+			<when test="page !=null and page.orderBy != null and page.orderBy != ''">
+				ORDER BY ${page.orderBy}
+			</when>
+			<otherwise>
+				ORDER BY a.update_date DESC
+			</otherwise>
+		</choose>
+	</select>
+	
+	<select id="findAllList" resultType="Refund" >
+		SELECT 
+			<include refid="refundColumns"/>
+		FROM t_refund a
+		<include refid="refundJoins"/>
+		<where>
+			a.del_flag = #{DEL_FLAG_NORMAL}
+		</where>		
+		<choose>
+			<when test="page !=null and page.orderBy != null and page.orderBy != ''">
+				ORDER BY ${page.orderBy}
+			</when>
+			<otherwise>
+				ORDER BY a.update_date DESC
+			</otherwise>
+		</choose>
+	</select>
+	
+	<insert id="insert">
+		INSERT INTO t_refund(
+			id,
+			create_by,
+			create_date,
+			update_by,
+			update_date,
+			remarks,
+			del_flag,
+			refund_no,
+			customer_id,
+			order_id,
+			order_amount,
+			apply_amount,
+			refund_amount,
+			reason,
+			attachment,
+			state,
+			apply_time
+		) VALUES (
+			#{id},
+			#{createBy.id},
+			#{createDate},
+			#{updateBy.id},
+			#{updateDate},
+			#{remarks},
+			#{delFlag},
+			#{refundNo},
+			#{customer.id},
+			#{order.id},
+			#{orderAmount},
+			#{applyAmount},
+			#{refundAmount},
+			#{reason},
+			#{attachment},
+			#{state},
+			#{applyTime}
+		)
+	</insert>
+	
+	<update id="update">
+		UPDATE t_refund SET 	
+			update_by = #{updateBy.id},
+			update_date = #{updateDate},
+			remarks = #{remarks},
+			refund_no = #{refundNo},
+			customer_id = #{customer.id},
+			order_id = #{order.id},
+			order_amount = #{orderAmount},
+			apply_amount = #{applyAmount},
+			refund_amount = #{refundAmount},
+			reason = #{reason},
+			attachment = #{attachment},
+			state = #{state},
+			apply_time = #{applyTime}
+		WHERE id = #{id}
+	</update>
+	
+	
+	<!--物理删除-->
+	<update id="delete">
+		DELETE FROM t_refund
+		WHERE id = #{id}
+	</update>
+	
+	<!--逻辑删除-->
+	<update id="deleteByLogic">
+		UPDATE t_refund SET 
+			del_flag = #{DEL_FLAG_DELETE}
+		WHERE id = #{id}
+	</update>
+	
+	
+	<!-- 根据实体名称和字段名称和字段值获取唯一记录 -->
+	<select id="findUniqueByProperty" resultType="Refund" statementType="STATEMENT">
+		select * FROM t_refund  where ${propertyName} = '${value}'
+	</select>
+	
+</mapper>

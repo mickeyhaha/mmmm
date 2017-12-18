@@ -12,11 +12,11 @@ import com.jeeplus.modules.vm.entity.VendingMachine;
 /**
  * 售货机管理DAO接口
  * @author Jason Dong
- * @version 2017-12-12
+ * @version 2017-12-18
  */
 @MyBatisDao
 public interface VendingMachineDao extends CrudDao<VendingMachine> {
 
-	public List<VmGroup> findListByvmGroupId(VmGroup vmGroupId);
+	public List<VmGroup> findListByvmGroup(VmGroup vmGroup);
 	
 }

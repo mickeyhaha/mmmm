@@ -36,7 +36,7 @@ import com.jeeplus.modules.vmgroup.service.VmGroupService;
 /**
  * 售货机分组Controller
  * @author Jason Dong
- * @version 2017-12-12
+ * @version 2017-12-18
  */
 @Controller
 @RequestMapping(value = "${adminPath}/vmgroup/vmGroup")
@@ -58,7 +58,7 @@ public class VmGroupController extends BaseController {
 	}
 	
 	/**
-	 * 保存售货机分组成功列表页面
+	 * 售货机分组列表页面
 	 */
 	@RequiresPermissions("vmgroup:vmGroup:list")
 	@RequestMapping(value = {"list", ""})
@@ -69,7 +69,7 @@ public class VmGroupController extends BaseController {
 	}
 
 	/**
-	 * 查看，增加，编辑保存售货机分组成功表单页面
+	 * 查看，增加，编辑售货机分组表单页面
 	 */
 	@RequiresPermissions(value={"vmgroup:vmGroup:view","vmgroup:vmGroup:add","vmgroup:vmGroup:edit"},logical=Logical.OR)
 	@RequestMapping(value = "form")
@@ -79,7 +79,7 @@ public class VmGroupController extends BaseController {
 	}
 
 	/**
-	 * 保存保存售货机分组成功
+	 * 保存售货机分组
 	 */
 	@RequiresPermissions(value={"vmgroup:vmGroup:add","vmgroup:vmGroup:edit"},logical=Logical.OR)
 	@RequestMapping(value = "save")
@@ -94,23 +94,23 @@ public class VmGroupController extends BaseController {
 		}else{//新增表单保存
 			vmGroupService.save(vmGroup);//保存
 		}
-		addMessage(redirectAttributes, "保存保存售货机分组成功成功");
+		addMessage(redirectAttributes, "保存售货机分组成功");
 		return "redirect:"+Global.getAdminPath()+"/vmgroup/vmGroup/?repage";
 	}
 	
 	/**
-	 * 删除保存售货机分组成功
+	 * 删除售货机分组
 	 */
 	@RequiresPermissions("vmgroup:vmGroup:del")
 	@RequestMapping(value = "delete")
 	public String delete(VmGroup vmGroup, RedirectAttributes redirectAttributes) {
 		vmGroupService.delete(vmGroup);
-		addMessage(redirectAttributes, "删除保存售货机分组成功成功");
+		addMessage(redirectAttributes, "删除售货机分组成功");
 		return "redirect:"+Global.getAdminPath()+"/vmgroup/vmGroup/?repage";
 	}
 	
 	/**
-	 * 批量删除保存售货机分组成功
+	 * 批量删除售货机分组
 	 */
 	@RequiresPermissions("vmgroup:vmGroup:del")
 	@RequestMapping(value = "deleteAll")
@@ -119,7 +119,7 @@ public class VmGroupController extends BaseController {
 		for(String id : idArray){
 			vmGroupService.delete(vmGroupService.get(id));
 		}
-		addMessage(redirectAttributes, "删除保存售货机分组成功成功");
+		addMessage(redirectAttributes, "删除售货机分组成功");
 		return "redirect:"+Global.getAdminPath()+"/vmgroup/vmGroup/?repage";
 	}
 	
@@ -130,12 +130,12 @@ public class VmGroupController extends BaseController {
     @RequestMapping(value = "export", method=RequestMethod.POST)
     public String exportFile(VmGroup vmGroup, HttpServletRequest request, HttpServletResponse response, RedirectAttributes redirectAttributes) {
 		try {
-            String fileName = "保存售货机分组成功"+DateUtils.getDate("yyyyMMddHHmmss")+".xlsx";
+            String fileName = "售货机分组"+DateUtils.getDate("yyyyMMddHHmmss")+".xlsx";
             Page<VmGroup> page = vmGroupService.findPage(new Page<VmGroup>(request, response, -1), vmGroup);
-    		new ExportExcel("保存售货机分组成功", VmGroup.class).setDataList(page.getList()).write(response, fileName).dispose();
+    		new ExportExcel("售货机分组", VmGroup.class).setDataList(page.getList()).write(response, fileName).dispose();
     		return null;
 		} catch (Exception e) {
-			addMessage(redirectAttributes, "导出保存售货机分组成功记录失败！失败信息："+e.getMessage());
+			addMessage(redirectAttributes, "导出售货机分组记录失败！失败信息："+e.getMessage());
 		}
 		return "redirect:"+Global.getAdminPath()+"/vmgroup/vmGroup/?repage";
     }
@@ -164,25 +164,25 @@ public class VmGroupController extends BaseController {
 				}
 			}
 			if (failureNum>0){
-				failureMsg.insert(0, "，失败 "+failureNum+" 条保存售货机分组成功记录。");
+				failureMsg.insert(0, "，失败 "+failureNum+" 条售货机分组记录。");
 			}
-			addMessage(redirectAttributes, "已成功导入 "+successNum+" 条保存售货机分组成功记录"+failureMsg);
+			addMessage(redirectAttributes, "已成功导入 "+successNum+" 条售货机分组记录"+failureMsg);
 		} catch (Exception e) {
-			addMessage(redirectAttributes, "导入保存售货机分组成功失败！失败信息："+e.getMessage());
+			addMessage(redirectAttributes, "导入售货机分组失败！失败信息："+e.getMessage());
 		}
 		return "redirect:"+Global.getAdminPath()+"/vmgroup/vmGroup/?repage";
     }
 	
 	/**
-	 * 下载导入保存售货机分组成功数据模板
+	 * 下载导入售货机分组数据模板
 	 */
 	@RequiresPermissions("vmgroup:vmGroup:import")
     @RequestMapping(value = "import/template")
     public String importFileTemplate(HttpServletResponse response, RedirectAttributes redirectAttributes) {
 		try {
-            String fileName = "保存售货机分组成功数据导入模板.xlsx";
+            String fileName = "售货机分组数据导入模板.xlsx";
     		List<VmGroup> list = Lists.newArrayList(); 
-    		new ExportExcel("保存售货机分组成功数据", VmGroup.class, 1).setDataList(list).write(response, fileName).dispose();
+    		new ExportExcel("售货机分组数据", VmGroup.class, 1).setDataList(list).write(response, fileName).dispose();
     		return null;
 		} catch (Exception e) {
 			addMessage(redirectAttributes, "导入模板下载失败！失败信息："+e.getMessage());

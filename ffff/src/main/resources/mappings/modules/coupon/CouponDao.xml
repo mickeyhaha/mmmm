@@ -1,0 +1,171 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.jeeplus.modules.coupon.dao.CouponDao">
+    
+	<sql id="couponColumns">
+		a.id AS "id",
+		a.create_by AS "createBy.id",
+		a.create_date AS "createDate",
+		a.update_by AS "updateBy.id",
+		a.update_date AS "updateDate",
+		a.remarks AS "remarks",
+		a.del_flag AS "delFlag",
+		a.type AS "type",
+		a.name AS "name",
+		a.discount_amount AS "discountAmount",
+		a.total_count AS "totalCount",
+		a.left_count AS "leftCount",
+		a.order_amount AS "orderAmount",
+		a.vm_ids AS "vmIds",
+		a.deliver_per_day AS "deliverPerDay",
+		a.recv_per_user AS "recvPerUser",
+		a.customer_type AS "customerType",
+		a.start_time AS "startTime",
+		a.end_time AS "endTime",
+		a.expire_day AS "expireDay",
+		a.use_order_amount AS "userOrderAmount",
+		a.use_vm_ids AS "userVmIds"
+	</sql>
+	
+	<sql id="couponJoins">
+	</sql>
+	
+    
+	<select id="get" resultType="Coupon" >
+		SELECT 
+			<include refid="couponColumns"/>
+		FROM t_coupon a
+		<include refid="couponJoins"/>
+		WHERE a.id = #{id}
+	</select>
+	
+	<select id="findList" resultType="Coupon" >
+		SELECT 
+			<include refid="couponColumns"/>
+		FROM t_coupon a
+		<include refid="couponJoins"/>
+		<where>
+			a.del_flag = #{DEL_FLAG_NORMAL}
+		</where>
+		<choose>
+			<when test="page !=null and page.orderBy != null and page.orderBy != ''">
+				ORDER BY ${page.orderBy}
+			</when>
+			<otherwise>
+				ORDER BY a.update_date DESC
+			</otherwise>
+		</choose>
+	</select>
+	
+	<select id="findAllList" resultType="Coupon" >
+		SELECT 
+			<include refid="couponColumns"/>
+		FROM t_coupon a
+		<include refid="couponJoins"/>
+		<where>
+			a.del_flag = #{DEL_FLAG_NORMAL}
+		</where>		
+		<choose>
+			<when test="page !=null and page.orderBy != null and page.orderBy != ''">
+				ORDER BY ${page.orderBy}
+			</when>
+			<otherwise>
+				ORDER BY a.update_date DESC
+			</otherwise>
+		</choose>
+	</select>
+	
+	<insert id="insert">
+		INSERT INTO t_coupon(
+			id,
+			create_by,
+			create_date,
+			update_by,
+			update_date,
+			remarks,
+			del_flag,
+			type,
+			name,
+			discount_amount,
+			total_count,
+			left_count,
+			order_amount,
+			vm_ids,
+			deliver_per_day,
+			recv_per_user,
+			customer_type,
+			start_time,
+			end_time,
+			expire_day,
+			use_order_amount,
+			use_vm_ids
+		) VALUES (
+			#{id},
+			#{createBy.id},
+			#{createDate},
+			#{updateBy.id},
+			#{updateDate},
+			#{remarks},
+			#{delFlag},
+			#{type},
+			#{name},
+			#{discountAmount},
+			#{totalCount},
+			#{leftCount},
+			#{orderAmount},
+			#{vmIds},
+			#{deliverPerDay},
+			#{recvPerUser},
+			#{customerType},
+			#{startTime},
+			#{endTime},
+			#{expireDay},
+			#{userOrderAmount},
+			#{userVmIds}
+		)
+	</insert>
+	
+	<update id="update">
+		UPDATE t_coupon SET 	
+			update_by = #{updateBy.id},
+			update_date = #{updateDate},
+			remarks = #{remarks},
+			type = #{type},
+			name = #{name},
+			discount_amount = #{discountAmount},
+			total_count = #{totalCount},
+			left_count = #{leftCount},
+			order_amount = #{orderAmount},
+			vm_ids = #{vmIds},
+			deliver_per_day = #{deliverPerDay},
+			recv_per_user = #{recvPerUser},
+			customer_type = #{customerType},
+			start_time = #{startTime},
+			end_time = #{endTime},
+			expire_day = #{expireDay},
+			use_order_amount = #{userOrderAmount},
+			use_vm_ids = #{userVmIds}
+		WHERE id = #{id}
+	</update>
+	
+	
+	<!--物理删除-->
+	<update id="delete">
+		DELETE FROM t_coupon
+		WHERE id = #{id}
+	</update>
+	
+	<!--逻辑删除-->
+	<update id="deleteByLogic">
+		UPDATE t_coupon SET 
+			del_flag = #{DEL_FLAG_DELETE}
+		WHERE id = #{id}
+	</update>
+	
+	
+	<!-- 根据实体名称和字段名称和字段值获取唯一记录 -->
+	<select id="findUniqueByProperty" resultType="Coupon" statementType="STATEMENT">
+		select * FROM t_coupon  where ${propertyName} = '${value}'
+	</select>
+	
+</mapper>

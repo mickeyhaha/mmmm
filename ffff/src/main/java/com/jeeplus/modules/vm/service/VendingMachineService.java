@@ -17,7 +17,7 @@ import com.jeeplus.modules.vm.dao.VendingMachineDao;
 /**
  * 售货机管理Service
  * @author Jason Dong
- * @version 2017-12-12
+ * @version 2017-12-18
  */
 @Service
 @Transactional(readOnly = true)
@@ -45,9 +45,9 @@ public class VendingMachineService extends CrudService<VendingMachineDao, Vendin
 		super.delete(vendingMachine);
 	}
 	
-	public Page<VmGroup> findPageByvmGroupId(Page<VmGroup> page, VmGroup vmGroupId) {
-		vmGroupId.setPage(page);
-		page.setList(dao.findListByvmGroupId(vmGroupId));
+	public Page<VmGroup> findPageByvmGroup(Page<VmGroup> page, VmGroup vmGroup) {
+		vmGroup.setPage(page);
+		page.setList(dao.findListByvmGroup(vmGroup));
 		return page;
 	}
 	

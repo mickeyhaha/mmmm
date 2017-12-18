@@ -10,7 +10,7 @@ import com.jeeplus.common.utils.excel.annotation.ExcelField;
 /**
  * 售货机分组Entity
  * @author Jason Dong
- * @version 2017-12-12
+ * @version 2017-12-18
  */
 public class VmGroup extends DataEntity<VmGroup> {
 	
@@ -25,7 +25,7 @@ public class VmGroup extends DataEntity<VmGroup> {
 		super(id);
 	}
 
-	@ExcelField(title="分组名称", align=2, sort=7)
+	@ExcelField(title="分组名称", align=2, sort=1)
 	public String getName() {
 		return name;
 	}

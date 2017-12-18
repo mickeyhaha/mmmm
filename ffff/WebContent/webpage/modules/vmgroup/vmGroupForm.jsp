@@ -2,7 +2,7 @@
 <%@ include file="/webpage/include/taglib.jsp"%>
 <html>
 <head>
-	<title>保存售货机分组成功管理</title>
+	<title>售货机分组管理</title>
 	<meta name="decorator" content="default"/>
 	<script type="text/javascript">
 		var validateForm;
@@ -41,15 +41,13 @@
 		<table class="table table-bordered  table-condensed dataTables-example dataTable no-footer">
 		   <tbody>
 				<tr>
-					<td class="width-15 active"><label class="pull-right">备注信息：</label></td>
+					<td class="width-15 active"><label class="pull-right">分组名称：</label></td>
 					<td class="width-35">
-						<form:textarea path="remarks" htmlEscape="false" rows="4"    class="form-control "/>
+						<form:input path="name" htmlEscape="false"    class="form-control "/>
 					</td>
-					<td class="width-15 active"><label class="pull-right"><font color="red">*</font>分组名称：</label></td>
-					<td class="width-35">
-						<form:input path="name" htmlEscape="false" maxlength="20"    class="form-control required"/>
-					</td>
-				</tr>
+					<td class="width-15 active"></td>
+		   			<td class="width-35" ></td>
+		  		</tr>
 		 	</tbody>
 		</table>
 	</form:form>

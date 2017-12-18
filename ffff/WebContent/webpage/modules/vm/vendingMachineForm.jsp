@@ -2,7 +2,7 @@
 <%@ include file="/webpage/include/taglib.jsp"%>
 <html>
 <head>
-	<title>保存售货机管理</title>
+	<title>售货机管理管理</title>
 	<meta name="decorator" content="default"/>
 	<script type="text/javascript">
 		var validateForm;
@@ -41,26 +41,84 @@
 		<table class="table table-bordered  table-condensed dataTables-example dataTable no-footer">
 		   <tbody>
 				<tr>
-					<td class="width-15 active"><label class="pull-right">备注信息：</label></td>
+					<td class="width-15 active"><label class="pull-right">售货机编号：</label></td>
 					<td class="width-35">
-						<form:textarea path="remarks" htmlEscape="false" rows="4"    class="form-control "/>
+						<form:input path="vmNo" htmlEscape="false"    class="form-control "/>
 					</td>
-					<td class="width-15 active"><label class="pull-right"><font color="red">*</font>售货机编号：</label></td>
+					<td class="width-15 active"><label class="pull-right">售货机名称：</label></td>
 					<td class="width-35">
-						<form:input path="vmNo" htmlEscape="false"    class="form-control required"/>
+						<form:input path="name" htmlEscape="false"    class="form-control "/>
 					</td>
 				</tr>
 				<tr>
-					<td class="width-15 active"><label class="pull-right"><font color="red">*</font>售货机名称：</label></td>
+					<td class="width-15 active"><label class="pull-right">售货机型号：</label></td>
 					<td class="width-35">
-						<form:input path="name" htmlEscape="false"    class="form-control required"/>
+						<form:input path="type" htmlEscape="false"    class="form-control "/>
 					</td>
-					<td class="width-15 active"><label class="pull-right">分组id：</label></td>
+					<td class="width-15 active"><label class="pull-right">RFID读写器序列号：</label></td>
 					<td class="width-35">
-						<sys:gridselect url="${ctx}/vm/vendingMachine/selectvmGroupId" id="vmGroupId" name="vmGroupId.id"  value="${vendingMachine.vmGroupId.id}"  title="选择分组id" labelName="vmGroupId.name" 
-						 labelValue="${vendingMachine.vmGroupId.name}" cssClass="form-control required" fieldLabels="名称" fieldKeys="name" searchLabel="名称2" searchKey="name" ></sys:gridselect>
+						<form:input path="readerNo" htmlEscape="false"    class="form-control "/>
 					</td>
 				</tr>
+				<tr>
+					<td class="width-15 active"><label class="pull-right">投放省：</label></td>
+					<td class="width-35">
+						<form:input path="province" htmlEscape="false"    class="form-control "/>
+					</td>
+					<td class="width-15 active"><label class="pull-right">投放城市：</label></td>
+					<td class="width-35">
+						<form:input path="city" htmlEscape="false"    class="form-control "/>
+					</td>
+				</tr>
+				<tr>
+					<td class="width-15 active"><label class="pull-right">投放地区：</label></td>
+					<td class="width-35">
+						<form:input path="area" htmlEscape="false"    class="form-control "/>
+					</td>
+					<td class="width-15 active"><label class="pull-right">投放详细地址：</label></td>
+					<td class="width-35">
+						<form:input path="address" htmlEscape="false"    class="form-control "/>
+					</td>
+				</tr>
+				<tr>
+					<td class="width-15 active"><label class="pull-right">平台商状态：</label></td>
+					<td class="width-35">
+						<form:input path="platformState" htmlEscape="false"    class="form-control "/>
+					</td>
+					<td class="width-15 active"><label class="pull-right">运营商状态：</label></td>
+					<td class="width-35">
+						<form:input path="supplierState" htmlEscape="false"    class="form-control "/>
+					</td>
+				</tr>
+				<tr>
+					<td class="width-15 active"><label class="pull-right">售货机状态(在线，离线，停用)：</label></td>
+					<td class="width-35">
+						<form:input path="vmState" htmlEscape="false"    class="form-control "/>
+					</td>
+					<td class="width-15 active"><label class="pull-right">创建时间：</label></td>
+					<td class="width-35">
+						<form:input path="createTime" htmlEscape="false"    class="form-control "/>
+					</td>
+				</tr>
+				<tr>
+					<td class="width-15 active"><label class="pull-right">二维码：</label></td>
+					<td class="width-35">
+						<form:input path="barCode" htmlEscape="false"    class="form-control "/>
+					</td>
+					<td class="width-15 active"><label class="pull-right">标准库存：</label></td>
+					<td class="width-35">
+						<form:input path="standardStock" htmlEscape="false"    class="form-control "/>
+					</td>
+				</tr>
+				<tr>
+					<td class="width-15 active"><label class="pull-right">分组编号：</label></td>
+					<td class="width-35">
+						<sys:gridselect url="${ctx}/vm/vendingMachine/selectvmGroup" id="vmGroup" name="vmGroup.id"  value="${vendingMachine.vmGroup.id}"  title="选择分组编号" labelName="vmGroup.name" 
+						 labelValue="${vendingMachine.vmGroup.name}" cssClass="form-control required" fieldLabels="ID|分组名" fieldKeys="id|name" searchLabel="分组名" searchKey="name" ></sys:gridselect>
+					</td>
+					<td class="width-15 active"></td>
+		   			<td class="width-35" ></td>
+		  		</tr>
 		 	</tbody>
 		</table>
 	</form:form>

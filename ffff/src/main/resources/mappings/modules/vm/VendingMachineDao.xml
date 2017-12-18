@@ -12,19 +12,31 @@
 		a.del_flag AS "delFlag",
 		a.vm_no AS "vmNo",
 		a.name AS "name",
-		a.vm_group_id AS "vmGroupId.id",
-		vmGroupId.name AS "vmGroupId.name"
+		a.type AS "type",
+		a.reader_no AS "readerNo",
+		a.province AS "province",
+		a.city AS "city",
+		a.area AS "area",
+		a.address AS "address",
+		a.platform_state AS "platformState",
+		a.supplier_state AS "supplierState",
+		a.vm_state AS "vmState",
+		a.create_time AS "createTime",
+		a.bar_code AS "barCode",
+		a.standard_stock AS "standardStock",
+		a.group_id AS "vmGroup.id",
+		vmGroup.name AS "vmGroup.name"
 	</sql>
 	
 	<sql id="vendingMachineJoins">
-		LEFT JOIN vm_group vmGroupId ON vmGroupId.id = a.vm_group_id
+		LEFT JOIN t_vm_group vmGroup ON vmGroup.id = a.group_id
 	</sql>
 	
     
 	<select id="get" resultType="VendingMachine" >
 		SELECT 
 			<include refid="vendingMachineColumns"/>
-		FROM vending_machine a
+		FROM t_vending_machine a
 		<include refid="vendingMachineJoins"/>
 		WHERE a.id = #{id}
 	</select>
@@ -32,21 +44,12 @@
 	<select id="findList" resultType="VendingMachine" >
 		SELECT 
 			<include refid="vendingMachineColumns"/>
-		FROM vending_machine a
+		FROM t_vending_machine a
 		<include refid="vendingMachineJoins"/>
 		<where>
 			a.del_flag = #{DEL_FLAG_NORMAL}
-			<if test="vmNo != null and vmNo != ''">
-				AND a.vm_no LIKE 
-					<if test="dbName == 'oracle'">'%'||#{vmNo}||'%'</if>
-					<if test="dbName == 'mssql'">'%'+#{vmNo}+'%'</if>
-					<if test="dbName == 'mysql'">concat('%',#{vmNo},'%')</if>
-			</if>
-			<if test="name != null and name != ''">
-				AND a.name LIKE 
-					<if test="dbName == 'oracle'">'%'||#{name}||'%'</if>
-					<if test="dbName == 'mssql'">'%'+#{name}+'%'</if>
-					<if test="dbName == 'mysql'">concat('%',#{name},'%')</if>
+			<if test="vmGroup != null and vmGroup.id != null and vmGroup.id != ''">
+				AND a.group_id = #{vmGroup.id}
 			</if>
 		</where>
 		<choose>
@@ -62,7 +65,7 @@
 	<select id="findAllList" resultType="VendingMachine" >
 		SELECT 
 			<include refid="vendingMachineColumns"/>
-		FROM vending_machine a
+		FROM t_vending_machine a
 		<include refid="vendingMachineJoins"/>
 		<where>
 			a.del_flag = #{DEL_FLAG_NORMAL}
@@ -78,7 +81,7 @@
 	</select>
 	
 	<insert id="insert">
-		INSERT INTO vending_machine(
+		INSERT INTO t_vending_machine(
 			id,
 			create_by,
 			create_date,
@@ -88,7 +91,19 @@
 			del_flag,
 			vm_no,
 			name,
-			vm_group_id
+			type,
+			reader_no,
+			province,
+			city,
+			area,
+			address,
+			platform_state,
+			supplier_state,
+			vm_state,
+			create_time,
+			bar_code,
+			standard_stock,
+			group_id
 		) VALUES (
 			#{id},
 			#{createBy.id},
@@ -99,31 +114,55 @@
 			#{delFlag},
 			#{vmNo},
 			#{name},
-			#{vmGroupId.id}
+			#{type},
+			#{readerNo},
+			#{province},
+			#{city},
+			#{area},
+			#{address},
+			#{platformState},
+			#{supplierState},
+			#{vmState},
+			#{createTime},
+			#{barCode},
+			#{standardStock},
+			#{vmGroup.id}
 		)
 	</insert>
 	
 	<update id="update">
-		UPDATE vending_machine SET 	
+		UPDATE t_vending_machine SET 	
 			update_by = #{updateBy.id},
 			update_date = #{updateDate},
 			remarks = #{remarks},
 			vm_no = #{vmNo},
 			name = #{name},
-			vm_group_id = #{vmGroupId.id}
+			type = #{type},
+			reader_no = #{readerNo},
+			province = #{province},
+			city = #{city},
+			area = #{area},
+			address = #{address},
+			platform_state = #{platformState},
+			supplier_state = #{supplierState},
+			vm_state = #{vmState},
+			create_time = #{createTime},
+			bar_code = #{barCode},
+			standard_stock = #{standardStock},
+			group_id = #{vmGroup.id}
 		WHERE id = #{id}
 	</update>
 	
 	
 	<!--物理删除-->
 	<update id="delete">
-		DELETE FROM vending_machine
+		DELETE FROM t_vending_machine
 		WHERE id = #{id}
 	</update>
 	
 	<!--逻辑删除-->
 	<update id="deleteByLogic">
-		UPDATE vending_machine SET 
+		UPDATE t_vending_machine SET 
 			del_flag = #{DEL_FLAG_DELETE}
 		WHERE id = #{id}
 	</update>
@@ -131,13 +170,13 @@
 	
 	<!-- 根据实体名称和字段名称和字段值获取唯一记录 -->
 	<select id="findUniqueByProperty" resultType="VendingMachine" statementType="STATEMENT">
-		select * FROM vending_machine  where ${propertyName} = '${value}'
+		select * FROM t_vending_machine  where ${propertyName} = '${value}'
 	</select>
 	
-	<select id="findListByvmGroupId" resultType="VmGroup">
+	<select id="findListByvmGroup" resultType="VmGroup">
 		SELECT 
 			*
-		FROM vm_group a
+		FROM t_vm_group a
 		<where>
 			a.del_flag = #{DEL_FLAG_NORMAL}
 			<if test="name != null and name != ''">

@@ -39,7 +39,7 @@ import com.jeeplus.modules.vm.service.VendingMachineService;
 /**
  * 售货机管理Controller
  * @author Jason Dong
- * @version 2017-12-12
+ * @version 2017-12-18
  */
 @Controller
 @RequestMapping(value = "${adminPath}/vm/vendingMachine")
@@ -61,7 +61,7 @@ public class VendingMachineController extends BaseController {
 	}
 	
 	/**
-	 * 保存售货机列表页面
+	 * 售货机管理列表页面
 	 */
 	@RequiresPermissions("vm:vendingMachine:list")
 	@RequestMapping(value = {"list", ""})
@@ -72,7 +72,7 @@ public class VendingMachineController extends BaseController {
 	}
 
 	/**
-	 * 查看，增加，编辑保存售货机表单页面
+	 * 查看，增加，编辑售货机管理表单页面
 	 */
 	@RequiresPermissions(value={"vm:vendingMachine:view","vm:vendingMachine:add","vm:vendingMachine:edit"},logical=Logical.OR)
 	@RequestMapping(value = "form")
@@ -82,7 +82,7 @@ public class VendingMachineController extends BaseController {
 	}
 
 	/**
-	 * 保存保存售货机
+	 * 保存售货机管理
 	 */
 	@RequiresPermissions(value={"vm:vendingMachine:add","vm:vendingMachine:edit"},logical=Logical.OR)
 	@RequestMapping(value = "save")
@@ -97,23 +97,23 @@ public class VendingMachineController extends BaseController {
 		}else{//新增表单保存
 			vendingMachineService.save(vendingMachine);//保存
 		}
-		addMessage(redirectAttributes, "保存保存售货机成功");
+		addMessage(redirectAttributes, "保存售货机管理成功");
 		return "redirect:"+Global.getAdminPath()+"/vm/vendingMachine/?repage";
 	}
 	
 	/**
-	 * 删除保存售货机
+	 * 删除售货机管理
 	 */
 	@RequiresPermissions("vm:vendingMachine:del")
 	@RequestMapping(value = "delete")
 	public String delete(VendingMachine vendingMachine, RedirectAttributes redirectAttributes) {
 		vendingMachineService.delete(vendingMachine);
-		addMessage(redirectAttributes, "删除保存售货机成功");
+		addMessage(redirectAttributes, "删除售货机管理成功");
 		return "redirect:"+Global.getAdminPath()+"/vm/vendingMachine/?repage";
 	}
 	
 	/**
-	 * 批量删除保存售货机
+	 * 批量删除售货机管理
 	 */
 	@RequiresPermissions("vm:vendingMachine:del")
 	@RequestMapping(value = "deleteAll")
@@ -122,7 +122,7 @@ public class VendingMachineController extends BaseController {
 		for(String id : idArray){
 			vendingMachineService.delete(vendingMachineService.get(id));
 		}
-		addMessage(redirectAttributes, "删除保存售货机成功");
+		addMessage(redirectAttributes, "删除售货机管理成功");
 		return "redirect:"+Global.getAdminPath()+"/vm/vendingMachine/?repage";
 	}
 	
@@ -133,12 +133,12 @@ public class VendingMachineController extends BaseController {
     @RequestMapping(value = "export", method=RequestMethod.POST)
     public String exportFile(VendingMachine vendingMachine, HttpServletRequest request, HttpServletResponse response, RedirectAttributes redirectAttributes) {
 		try {
-            String fileName = "保存售货机"+DateUtils.getDate("yyyyMMddHHmmss")+".xlsx";
+            String fileName = "售货机管理"+DateUtils.getDate("yyyyMMddHHmmss")+".xlsx";
             Page<VendingMachine> page = vendingMachineService.findPage(new Page<VendingMachine>(request, response, -1), vendingMachine);
-    		new ExportExcel("保存售货机", VendingMachine.class).setDataList(page.getList()).write(response, fileName).dispose();
+    		new ExportExcel("售货机管理", VendingMachine.class).setDataList(page.getList()).write(response, fileName).dispose();
     		return null;
 		} catch (Exception e) {
-			addMessage(redirectAttributes, "导出保存售货机记录失败！失败信息："+e.getMessage());
+			addMessage(redirectAttributes, "导出售货机管理记录失败！失败信息："+e.getMessage());
 		}
 		return "redirect:"+Global.getAdminPath()+"/vm/vendingMachine/?repage";
     }
@@ -167,25 +167,25 @@ public class VendingMachineController extends BaseController {
 				}
 			}
 			if (failureNum>0){
-				failureMsg.insert(0, "，失败 "+failureNum+" 条保存售货机记录。");
+				failureMsg.insert(0, "，失败 "+failureNum+" 条售货机管理记录。");
 			}
-			addMessage(redirectAttributes, "已成功导入 "+successNum+" 条保存售货机记录"+failureMsg);
+			addMessage(redirectAttributes, "已成功导入 "+successNum+" 条售货机管理记录"+failureMsg);
 		} catch (Exception e) {
-			addMessage(redirectAttributes, "导入保存售货机失败！失败信息："+e.getMessage());
+			addMessage(redirectAttributes, "导入售货机管理失败！失败信息："+e.getMessage());
 		}
 		return "redirect:"+Global.getAdminPath()+"/vm/vendingMachine/?repage";
     }
 	
 	/**
-	 * 下载导入保存售货机数据模板
+	 * 下载导入售货机管理数据模板
 	 */
 	@RequiresPermissions("vm:vendingMachine:import")
     @RequestMapping(value = "import/template")
     public String importFileTemplate(HttpServletResponse response, RedirectAttributes redirectAttributes) {
 		try {
-            String fileName = "保存售货机数据导入模板.xlsx";
+            String fileName = "售货机管理数据导入模板.xlsx";
     		List<VendingMachine> list = Lists.newArrayList(); 
-    		new ExportExcel("保存售货机数据", VendingMachine.class, 1).setDataList(list).write(response, fileName).dispose();
+    		new ExportExcel("售货机管理数据", VendingMachine.class, 1).setDataList(list).write(response, fileName).dispose();
     		return null;
 		} catch (Exception e) {
 			addMessage(redirectAttributes, "导入模板下载失败！失败信息："+e.getMessage());
@@ -195,11 +195,11 @@ public class VendingMachineController extends BaseController {
 	
 	
 	/**
-	 * 选择分组id
+	 * 选择分组编号
 	 */
-	@RequestMapping(value = "selectvmGroupId")
-	public String selectvmGroupId(VmGroup vmGroupId, String url, String fieldLabels, String fieldKeys, String searchLabel, String searchKey, HttpServletRequest request, HttpServletResponse response, Model model) {
-		Page<VmGroup> page = vendingMachineService.findPageByvmGroupId(new Page<VmGroup>(request, response),  vmGroupId);
+	@RequestMapping(value = "selectvmGroup")
+	public String selectvmGroup(VmGroup vmGroup, String url, String fieldLabels, String fieldKeys, String searchLabel, String searchKey, HttpServletRequest request, HttpServletResponse response, Model model) {
+		Page<VmGroup> page = vendingMachineService.findPageByvmGroup(new Page<VmGroup>(request, response),  vmGroup);
 		try {
 			fieldLabels = URLDecoder.decode(fieldLabels, "UTF-8");
 			fieldKeys = URLDecoder.decode(fieldKeys, "UTF-8");
@@ -215,7 +215,7 @@ public class VendingMachineController extends BaseController {
 		model.addAttribute("url", url);
 		model.addAttribute("searchLabel", searchLabel);
 		model.addAttribute("searchKey", searchKey);
-		model.addAttribute("obj", vmGroupId);
+		model.addAttribute("obj", vmGroup);
 		model.addAttribute("page", page);
 		return "modules/sys/gridselect";
 	}

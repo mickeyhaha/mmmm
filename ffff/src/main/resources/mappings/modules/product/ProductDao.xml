@@ -1,0 +1,159 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.jeeplus.modules.product.dao.ProductDao">
+    
+	<sql id="productColumns">
+		a.id AS "id",
+		a.create_by AS "createBy.id",
+		a.create_date AS "createDate",
+		a.update_by AS "updateBy.id",
+		a.update_date AS "updateDate",
+		a.remarks AS "remarks",
+		a.del_flag AS "delFlag",
+		a.name AS "name",
+		a.product_no AS "productNo",
+		a.bar_code AS "barCode",
+		a.batch_id AS "batch.id",
+		a.specification AS "specification",
+		a.packing_unit AS "packingUnit",
+		a.cost_price AS "costPrice",
+		a.description AS "description",
+		a.sale_price AS "salePrice",
+		a.expire_date AS "expireDate",
+		a.type AS "type",
+		a.create_time AS "createTime"
+	</sql>
+	
+	<sql id="productJoins">
+	</sql>
+	
+    
+	<select id="get" resultType="Product" >
+		SELECT 
+			<include refid="productColumns"/>
+		FROM t_product a
+		<include refid="productJoins"/>
+		WHERE a.id = #{id}
+	</select>
+	
+	<select id="findList" resultType="Product" >
+		SELECT 
+			<include refid="productColumns"/>
+		FROM t_product a
+		<include refid="productJoins"/>
+		<where>
+			a.del_flag = #{DEL_FLAG_NORMAL}
+		</where>
+		<choose>
+			<when test="page !=null and page.orderBy != null and page.orderBy != ''">
+				ORDER BY ${page.orderBy}
+			</when>
+			<otherwise>
+				ORDER BY a.update_date DESC
+			</otherwise>
+		</choose>
+	</select>
+	
+	<select id="findAllList" resultType="Product" >
+		SELECT 
+			<include refid="productColumns"/>
+		FROM t_product a
+		<include refid="productJoins"/>
+		<where>
+			a.del_flag = #{DEL_FLAG_NORMAL}
+		</where>		
+		<choose>
+			<when test="page !=null and page.orderBy != null and page.orderBy != ''">
+				ORDER BY ${page.orderBy}
+			</when>
+			<otherwise>
+				ORDER BY a.update_date DESC
+			</otherwise>
+		</choose>
+	</select>
+	
+	<insert id="insert">
+		INSERT INTO t_product(
+			id,
+			create_by,
+			create_date,
+			update_by,
+			update_date,
+			remarks,
+			del_flag,
+			name,
+			product_no,
+			bar_code,
+			batch_id,
+			specification,
+			packing_unit,
+			cost_price,
+			description,
+			sale_price,
+			expire_date,
+			type,
+			create_time
+		) VALUES (
+			#{id},
+			#{createBy.id},
+			#{createDate},
+			#{updateBy.id},
+			#{updateDate},
+			#{remarks},
+			#{delFlag},
+			#{name},
+			#{productNo},
+			#{barCode},
+			#{batch.id},
+			#{specification},
+			#{packingUnit},
+			#{costPrice},
+			#{description},
+			#{salePrice},
+			#{expireDate},
+			#{type},
+			#{createTime}
+		)
+	</insert>
+	
+	<update id="update">
+		UPDATE t_product SET 	
+			update_by = #{updateBy.id},
+			update_date = #{updateDate},
+			remarks = #{remarks},
+			name = #{name},
+			product_no = #{productNo},
+			bar_code = #{barCode},
+			batch_id = #{batch.id},
+			specification = #{specification},
+			packing_unit = #{packingUnit},
+			cost_price = #{costPrice},
+			description = #{description},
+			sale_price = #{salePrice},
+			expire_date = #{expireDate},
+			type = #{type},
+			create_time = #{createTime}
+		WHERE id = #{id}
+	</update>
+	
+	
+	<!--物理删除-->
+	<update id="delete">
+		DELETE FROM t_product
+		WHERE id = #{id}
+	</update>
+	
+	<!--逻辑删除-->
+	<update id="deleteByLogic">
+		UPDATE t_product SET 
+			del_flag = #{DEL_FLAG_DELETE}
+		WHERE id = #{id}
+	</update>
+	
+	
+	<!-- 根据实体名称和字段名称和字段值获取唯一记录 -->
+	<select id="findUniqueByProperty" resultType="Product" statementType="STATEMENT">
+		select * FROM t_product  where ${propertyName} = '${value}'
+	</select>
+	
+</mapper>

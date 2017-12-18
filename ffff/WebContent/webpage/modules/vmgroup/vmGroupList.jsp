@@ -2,7 +2,7 @@
 <%@ include file="/webpage/include/taglib.jsp"%>
 <html>
 <head>
-	<title>保存售货机分组成功管理</title>
+	<title>售货机分组管理</title>
 	<meta name="decorator" content="default"/>
 	<script type="text/javascript">
 		$(document).ready(function() {
@@ -13,7 +13,7 @@
 	<div class="wrapper wrapper-content">
 	<div class="ibox">
 	<div class="ibox-title">
-		<h5>保存售货机分组成功列表 </h5>
+		<h5>售货机分组列表 </h5>
 		<div class="ibox-tools">
 			<a class="collapse-link">
 				<i class="fa fa-chevron-up"></i>
@@ -55,10 +55,10 @@
 	<div class="col-sm-12">
 		<div class="pull-left">
 			<shiro:hasPermission name="vmgroup:vmGroup:add">
-				<table:addRow url="${ctx}/vmgroup/vmGroup/form" title="保存售货机分组成功"></table:addRow><!-- 增加按钮 -->
+				<table:addRow url="${ctx}/vmgroup/vmGroup/form" title="售货机分组"></table:addRow><!-- 增加按钮 -->
 			</shiro:hasPermission>
 			<shiro:hasPermission name="vmgroup:vmGroup:edit">
-			    <table:editRow url="${ctx}/vmgroup/vmGroup/form" title="保存售货机分组成功" id="contentTable"></table:editRow><!-- 编辑按钮 -->
+			    <table:editRow url="${ctx}/vmgroup/vmGroup/form" title="售货机分组" id="contentTable"></table:editRow><!-- 编辑按钮 -->
 			</shiro:hasPermission>
 			<shiro:hasPermission name="vmgroup:vmGroup:del">
 				<table:delRow url="${ctx}/vmgroup/vmGroup/deleteAll" id="contentTable"></table:delRow><!-- 删除按钮 -->
@@ -84,7 +84,6 @@
 		<thead>
 			<tr>
 				<th> <input type="checkbox" class="i-checks"></th>
-				<th  class="sort-column remarks">备注信息</th>
 				<th  class="sort-column name">分组名称</th>
 				<th>操作</th>
 			</tr>
@@ -93,21 +92,18 @@
 		<c:forEach items="${page.list}" var="vmGroup">
 			<tr>
 				<td> <input type="checkbox" id="${vmGroup.id}" class="i-checks"></td>
-				<td><a  href="#" onclick="openDialogView('查看保存售货机分组成功', '${ctx}/vmgroup/vmGroup/form?id=${vmGroup.id}','800px', '500px')">
-					${vmGroup.remarks}
+				<td><a  href="#" onclick="openDialogView('查看售货机分组', '${ctx}/vmgroup/vmGroup/form?id=${vmGroup.id}','800px', '500px')">
+					${vmGroup.name}
 				</a></td>
 				<td>
-					${vmGroup.name}
-				</td>
-				<td>
 					<shiro:hasPermission name="vmgroup:vmGroup:view">
-						<a href="#" onclick="openDialogView('查看保存售货机分组成功', '${ctx}/vmgroup/vmGroup/form?id=${vmGroup.id}','800px', '500px')" class="btn btn-info btn-xs" ><i class="fa fa-search-plus"></i> 查看</a>
+						<a href="#" onclick="openDialogView('查看售货机分组', '${ctx}/vmgroup/vmGroup/form?id=${vmGroup.id}','800px', '500px')" class="btn btn-info btn-xs" ><i class="fa fa-search-plus"></i> 查看</a>
 					</shiro:hasPermission>
 					<shiro:hasPermission name="vmgroup:vmGroup:edit">
-    					<a href="#" onclick="openDialog('修改保存售货机分组成功', '${ctx}/vmgroup/vmGroup/form?id=${vmGroup.id}','800px', '500px')" class="btn btn-success btn-xs" ><i class="fa fa-edit"></i> 修改</a>
+    					<a href="#" onclick="openDialog('修改售货机分组', '${ctx}/vmgroup/vmGroup/form?id=${vmGroup.id}','800px', '500px')" class="btn btn-success btn-xs" ><i class="fa fa-edit"></i> 修改</a>
     				</shiro:hasPermission>
     				<shiro:hasPermission name="vmgroup:vmGroup:del">
-						<a href="${ctx}/vmgroup/vmGroup/delete?id=${vmGroup.id}" onclick="return confirmx('确认要删除该保存售货机分组成功吗？', this.href)"   class="btn btn-danger btn-xs"><i class="fa fa-trash"></i> 删除</a>
+						<a href="${ctx}/vmgroup/vmGroup/delete?id=${vmGroup.id}" onclick="return confirmx('确认要删除该售货机分组吗？', this.href)"   class="btn btn-danger btn-xs"><i class="fa fa-trash"></i> 删除</a>
 					</shiro:hasPermission>
 				</td>
 			</tr>
