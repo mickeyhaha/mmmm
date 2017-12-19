@@ -12,7 +12,7 @@ import com.jeeplus.modules.vm.entity.VendingMachine;
 /**
  * 售货机管理DAO接口
  * @author Jason Dong
- * @version 2017-12-18
+ * @version 2017-12-19
  */
 @MyBatisDao
 public interface VendingMachineDao extends CrudDao<VendingMachine> {

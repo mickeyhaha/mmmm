@@ -10,7 +10,8 @@
 		a.update_by AS "updateBy.id",
 		a.update_date AS "updateDate",
 		a.remarks AS "remarks",
-		a.del_flag AS "delFlag"
+		a.del_flag AS "delFlag",
+		a.produce_date AS "produceDate"
 	</sql>
 	
 	<sql id="batchJoins">
@@ -70,7 +71,8 @@
 			update_by,
 			update_date,
 			remarks,
-			del_flag
+			del_flag,
+			produce_date
 		) VALUES (
 			#{id},
 			#{batchNo},
@@ -79,7 +81,8 @@
 			#{updateBy.id},
 			#{updateDate},
 			#{remarks},
-			#{delFlag}
+			#{delFlag},
+			#{produceDate}
 		)
 	</insert>
 	
@@ -88,7 +91,8 @@
 			batch_no = #{batchNo},
 			update_by = #{updateBy.id},
 			update_date = #{updateDate},
-			remarks = #{remarks}
+			remarks = #{remarks},
+			produce_date = #{produceDate}
 		WHERE id = #{id}
 	</update>
 	

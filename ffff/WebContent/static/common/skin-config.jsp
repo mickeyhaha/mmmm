@@ -4,7 +4,7 @@
         <div class="spin-icon">
             <i class="fa fa-cog fa-spin"></i>
         </div>
-        <div class="skin-setttings">
+        <div class="skin-setttings" style="display:none">
             <div class="title">主题设置</div>
             <div class="setings-item">
                 <span>

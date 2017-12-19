@@ -25,6 +25,7 @@
 	</sql>
 	
 	<sql id="productJoins">
+		LEFT JOIN t_batch batch ON batch.id = a.batch_id
 	</sql>
 	
     
@@ -43,6 +44,9 @@
 		<include refid="productJoins"/>
 		<where>
 			a.del_flag = #{DEL_FLAG_NORMAL}
+			<if test="batch != null and batch.id != null and batch.id != ''">
+				AND a.batch_id = #{batch.id}
+			</if>
 		</where>
 		<choose>
 			<when test="page !=null and page.orderBy != null and page.orderBy != ''">
@@ -156,4 +160,26 @@
 		select * FROM t_product  where ${propertyName} = '${value}'
 	</select>
 	
+	<select id="findListBybatch" resultType="Batch">
+		SELECT 
+			*
+		FROM t_batch a
+		<where>
+			a.del_flag = #{DEL_FLAG_NORMAL}
+			<if test="batchNo != null and batchNo != ''">
+				AND a.batchNo LIKE 
+				<if test="dbName == 'oracle'">#{batchNo}||'%'</if>
+				<if test="dbName == 'mssql'">#{batchNo}+'%'</if>
+				<if test="dbName == 'mysql'">concat(#{batchNo},'%')</if>
+			</if>
+		</where>
+		<choose>
+			<when test="page !=null and page.orderBy != null and page.orderBy != ''">
+				ORDER BY ${page.orderBy}
+			</when>
+			<otherwise>
+				ORDER BY a.update_date DESC
+			</otherwise>
+		</choose>
+	</select>
 </mapper>

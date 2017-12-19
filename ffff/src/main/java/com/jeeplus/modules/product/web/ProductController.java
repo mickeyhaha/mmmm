@@ -3,6 +3,8 @@
  */
 package com.jeeplus.modules.product.web;
 
+import java.io.UnsupportedEncodingException;
+import java.net.URLDecoder;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -21,6 +23,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.jeeplus.modules.batch.entity.Batch;
 import com.google.common.collect.Lists;
 import com.jeeplus.common.utils.DateUtils;
 import com.jeeplus.common.utils.MyBeanUtils;
@@ -36,7 +39,7 @@ import com.jeeplus.modules.product.service.ProductService;
 /**
  * 产品列表Controller
  * @author Jason Dong
- * @version 2017-12-18
+ * @version 2017-12-19
  */
 @Controller
 @RequestMapping(value = "${adminPath}/product/product")
@@ -191,6 +194,31 @@ public class ProductController extends BaseController {
     }
 	
 	
+	/**
+	 * 选择批次号
+	 */
+	@RequestMapping(value = "selectbatch")
+	public String selectbatch(Batch batch, String url, String fieldLabels, String fieldKeys, String searchLabel, String searchKey, HttpServletRequest request, HttpServletResponse response, Model model) {
+		Page<Batch> page = productService.findPageBybatch(new Page<Batch>(request, response),  batch);
+		try {
+			fieldLabels = URLDecoder.decode(fieldLabels, "UTF-8");
+			fieldKeys = URLDecoder.decode(fieldKeys, "UTF-8");
+			searchLabel = URLDecoder.decode(searchLabel, "UTF-8");
+			searchKey = URLDecoder.decode(searchKey, "UTF-8");
+		} catch (UnsupportedEncodingException e) {
+			e.printStackTrace();
+		}
+		model.addAttribute("labelNames", fieldLabels.split("-"));
+		model.addAttribute("labelValues", fieldKeys.split("-"));
+		model.addAttribute("fieldLabels", fieldLabels);
+		model.addAttribute("fieldKeys", fieldKeys);
+		model.addAttribute("url", url);
+		model.addAttribute("searchLabel", searchLabel);
+		model.addAttribute("searchKey", searchKey);
+		model.addAttribute("obj", batch);
+		model.addAttribute("page", page);
+		return "modules/sys/gridselect";
+	}
 	
 
 }

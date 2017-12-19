@@ -330,7 +330,7 @@
 
                     </div>
                     <div class="ibox-content">
-                        <p><i class="fa fa-send-o"></i> 网址：<a href="http://www.jeeplus.org" target="_blank">http://www.jeeplus.org</a>
+                        <p><i class="fa fa-send-o"></i> 网址：<a href="http://www.holo.hk" target="_blank">http://www.holo.hk</a>
                         </p>
                         <p><i class="fa fa-qq"></i> QQ：<a href="http://wpa.qq.com/msgrd?v=3&uin=117575171&site=qq&menu=yes" target="_blank">117575171</a>
                         </p>

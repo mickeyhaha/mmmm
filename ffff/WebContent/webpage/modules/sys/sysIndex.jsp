@@ -8,13 +8,13 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="renderer" content="webkit">
-    <title>JeePlus</title>
+    <title>HOLO</title>
 
 	<%@ include file="/webpage/include/head.jsp"%>
 	<script src="${ctxStatic}/common/inspinia.js?v=3.2.0"></script>
 	<script src="${ctxStatic}/common/contabs.js"></script> 
-    <meta name="keywords" content="JeePlus快速开发平台">
-    <meta name="description" content="JeePlus，采用spring mvc+mybatis+shiro+bootstrap，集成代码生成器的快速开发平台">
+    <meta name="keywords" content="HOLO">
+    <meta name="description" content="HOLO">
     <script type="text/javascript">
 	$(document).ready(function() {
 		 if('${fns:getDictLabel(cookie.theme.value,'theme','默认主题')}' == '天蓝主题'){
@@ -89,7 +89,7 @@
         <!--左侧导航结束-->
         <!--右侧部分开始-->
         <div id="page-wrapper" class="gray-bg dashbard-1">
-            <div class="row border-bottom">
+            <div class="row border-bottom" style="display:none">
                 <nav class="navbar navbar-static-top" role="navigation" style="margin-bottom: 0">
                     <div class="navbar-header"><a class="navbar-minimalize minimalize-styl-2 btn btn-primary " href="#"><i class="fa fa-bars"></i> </a>
                         <form role="search" class="navbar-form-custom" method="post" action="search_results.html">
@@ -169,7 +169,7 @@
                       
                       <!-- 国际化功能预留接口 -->
                         <li class="dropdown">
-							<a id="lang-switch" class="lang-selector dropdown-toggle" href="#" data-toggle="dropdown" aria-expanded="true">
+							<a id="lang-switch" class="lang-selector dropdown-toggle" href="#" data-toggle="dropdown" aria-expanded="true" style="display:none">
 								<span class="lang-selected">
 										<img  class="lang-flag" src="${ctxStatic}/common/img/china.png" alt="中国">
 										<span class="lang-id">中国</span>
@@ -262,7 +262,7 @@
                 <iframe class="J_iframe" name="iframe0" width="100%" height="100%" src="${ctx}/home" frameborder="0" data-id="${ctx}/home" seamless></iframe>
             </div>
             <div class="footer">
-                <div class="pull-left"><a href="http://www.jeeplus.org">http://www.jeeplus.org</a> &copy; 2015-2025</div>
+                <div class="pull-left"><a href="http://www.holo.hk">http://www.holo.hk</a> &copy; 2015-2025</div>
             </div>
         </div>
         <!--右侧部分结束-->

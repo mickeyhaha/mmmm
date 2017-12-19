@@ -44,6 +44,9 @@
 		<input id="pageSize" name="pageSize" type="hidden" value="${page.pageSize}"/>
 		<table:sortColumn id="orderBy" name="orderBy" value="${page.orderBy}" callback="sortOrRefresh();"/><!-- 支持排序 -->
 		<div class="form-group">
+			<span>批次号：</span>
+				<sys:gridselect url="${ctx}/product/product/selectbatch" id="batch" name="batch"  value="${product.batch.id}"  title="选择批次号" labelName="batch.batchNo" 
+					labelValue="${product.batch.batchNo}" cssClass="form-control required" fieldLabels="批次号-生产日期" fieldKeys="batchNo-produceDate" searchLabel="批次号" searchKey="batchNo" ></sys:gridselect>
 		 </div>	
 	</form:form>
 	<br/>
@@ -87,7 +90,7 @@
 				<th  class="sort-column name">货物名称</th>
 				<th  class="sort-column productNo">货物编号</th>
 				<th  class="sort-column barCode">条形码</th>
-				<th  class="sort-column batch.id">批次id</th>
+				<th  class="sort-column batch.id">批次号</th>
 				<th  class="sort-column specification">规格</th>
 				<th  class="sort-column packingUnit">包装单位</th>
 				<th  class="sort-column costPrice">成本价</th>
@@ -113,7 +116,7 @@
 					${product.barCode}
 				</td>
 				<td>
-					${product.batch.id}
+					${product.}
 				</td>
 				<td>
 					${product.specification}

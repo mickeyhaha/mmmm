@@ -13,7 +13,7 @@ import com.jeeplus.common.utils.excel.annotation.ExcelField;
 /**
  * 产品列表Entity
  * @author Jason Dong
- * @version 2017-12-18
+ * @version 2017-12-19
  */
 public class Product extends DataEntity<Product> {
 	
@@ -21,7 +21,7 @@ public class Product extends DataEntity<Product> {
 	private String name;		// 货物名称
 	private String productNo;		// 货物编号
 	private String barCode;		// 条形码
-	private Batch batch;		// 批次id
+	private Batch batch;		// 批次号
 	private String specification;		// 规格
 	private String packingUnit;		// 包装单位
 	private String costPrice;		// 成本价
@@ -66,7 +66,7 @@ public class Product extends DataEntity<Product> {
 		this.barCode = barCode;
 	}
 	
-	@ExcelField(title="批次id", align=2, sort=10)
+	@ExcelField(title="批次号", align=2, sort=10)
 	public Batch getBatch() {
 		return batch;
 	}

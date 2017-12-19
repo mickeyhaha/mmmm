@@ -11,7 +11,7 @@ import com.jeeplus.common.utils.excel.annotation.ExcelField;
 /**
  * 售货机管理Entity
  * @author Jason Dong
- * @version 2017-12-18
+ * @version 2017-12-19
  */
 public class VendingMachine extends DataEntity<VendingMachine> {
 	

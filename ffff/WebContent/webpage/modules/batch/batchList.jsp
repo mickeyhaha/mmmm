@@ -85,6 +85,8 @@
 			<tr>
 				<th> <input type="checkbox" class="i-checks"></th>
 				<th  class="sort-column batchNo">批次号</th>
+				<th  class="sort-column delFlag">启用</th>
+				<th  class="sort-column produceDate">生产日期</th>
 				<th>操作</th>
 			</tr>
 		</thead>
@@ -95,6 +97,12 @@
 				<td><a  href="#" onclick="openDialogView('查看批次管理', '${ctx}/batch/batch/form?id=${batch.id}','800px', '500px')">
 					${batch.batchNo}
 				</a></td>
+				<td>
+					${fns:getDictLabel(batch.delFlag, 'del_flag', '')}
+				</td>
+				<td>
+					<fmt:formatDate value="${batch.produceDate}" pattern="yyyy-MM-dd HH:mm:ss"/>
+				</td>
 				<td>
 					<shiro:hasPermission name="batch:batch:view">
 						<a href="#" onclick="openDialogView('查看批次管理', '${ctx}/batch/batch/form?id=${batch.id}','800px', '500px')" class="btn btn-info btn-xs" ><i class="fa fa-search-plus"></i> 查看</a>

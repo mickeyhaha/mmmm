@@ -31,6 +31,10 @@
 				}
 			});
 			
+					laydate({
+			            elem: '#produceDate', //目标元素。由于laydate.js封装了一个轻量级的选择器引擎，因此elem还允许你传入class、tag但必须按照这种方式 '#id .class'
+			            event: 'focus' //响应事件。如果没有传入event，则按照默认的click
+			        });
 		});
 	</script>
 </head>
@@ -45,9 +49,12 @@
 					<td class="width-35">
 						<form:input path="batchNo" htmlEscape="false"    class="form-control "/>
 					</td>
-					<td class="width-15 active"></td>
-		   			<td class="width-35" ></td>
-		  		</tr>
+					<td class="width-15 active"><label class="pull-right">生产日期：</label></td>
+					<td class="width-35">
+						<input id="produceDate" name="produceDate" type="text" maxlength="20" class="laydate-icon form-control layer-date "
+							value="<fmt:formatDate value="${batch.produceDate}" pattern="yyyy-MM-dd HH:mm:ss"/>"/>
+					</td>
+				</tr>
 		 	</tbody>
 		</table>
 	</form:form>

@@ -55,9 +55,10 @@
 					<td class="width-35">
 						<form:input path="barCode" htmlEscape="false"    class="form-control "/>
 					</td>
-					<td class="width-15 active"><label class="pull-right">批次id：</label></td>
+					<td class="width-15 active"><label class="pull-right">批次号：</label></td>
 					<td class="width-35">
-						<form:input path="batch.id" htmlEscape="false"    class="form-control "/>
+						<sys:gridselect url="${ctx}/product/product/selectbatch" id="batch" name="batch.id"  value="${product.batch.id}"  title="选择批次号" labelName="batch.batchNo" 
+						 labelValue="${product.batch.batchNo}" cssClass="form-control required" fieldLabels="批次号-生产日期" fieldKeys="batchNo-produceDate" searchLabel="批次号" searchKey="batchNo" ></sys:gridselect>
 					</td>
 				</tr>
 				<tr>

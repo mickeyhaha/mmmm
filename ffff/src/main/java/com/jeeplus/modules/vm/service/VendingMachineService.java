@@ -17,7 +17,7 @@ import com.jeeplus.modules.vm.dao.VendingMachineDao;
 /**
  * 售货机管理Service
  * @author Jason Dong
- * @version 2017-12-18
+ * @version 2017-12-19
  */
 @Service
 @Transactional(readOnly = true)
