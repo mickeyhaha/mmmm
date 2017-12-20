@@ -1,4 +1,4 @@
-package com.jeeplus.biz.enums;
+package com.holo.enums;
 
 /**
  * 售货机中产品状态： 正常可售，不可销售

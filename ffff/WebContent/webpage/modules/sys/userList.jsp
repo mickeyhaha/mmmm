@@ -6,8 +6,33 @@
 	<meta name="decorator" content="default"/>
 </head>
 <body>
+
 	<div class="wrapper wrapper-content">
-    <sys:message content="${message}"/>
+	<div class="ibox">
+	<div class="ibox-title">
+			<h5>用户列表 </h5>
+			<div class="ibox-tools" style="display:none">
+				<a class="collapse-link">
+					<i class="fa fa-chevron-up"></i>
+				</a>
+				<a class="dropdown-toggle" data-toggle="dropdown" href="form_basic.html#">
+					<i class="fa fa-wrench"></i>
+				</a>
+				<ul class="dropdown-menu dropdown-user">
+					<li><a href="#">选项1</a>
+					</li>
+					<li><a href="#">选项2</a>
+					</li>
+				</ul>
+				<a class="close-link">
+					<i class="fa fa-times"></i>
+				</a>
+			</div>
+	</div>
+    
+    <div class="ibox-content">
+	<sys:message content="${message}"/>
+	
 		<!-- 查询条件 -->
 	<div class="row">
 	<div class="col-sm-12">
@@ -19,11 +44,11 @@
 			<span>归属公司：</span>
 				<sys:treeselect id="company" name="company.id" value="${user.company.id}" labelName="company.name" labelValue="${user.company.name}" 
 				title="公司" url="/sys/office/treeData?type=1" cssClass=" form-control input-sm" allowClear="true"/>
-			<span>登录名：</span>
-				<form:input path="loginName" htmlEscape="false" maxlength="50" class=" form-control input-sm"/>
 			<span>归属部门：</span>
 				<sys:treeselect id="office" name="office.id" value="${user.office.id}" labelName="office.name" labelValue="${user.office.name}" 
 				title="部门" url="/sys/office/treeData?type=2" cssClass=" form-control input-sm" allowClear="true" notAllowSelectParent="true"/>
+			<span>登录名：</span>
+				<form:input path="loginName" htmlEscape="false" maxlength="50" class=" form-control input-sm"/>
 			<span>姓&nbsp;&nbsp;&nbsp;名：</span>
 				<form:input path="name" htmlEscape="false" maxlength="50" class=" form-control input-sm"/>
 		
@@ -68,10 +93,10 @@
 				<th><input type="checkbox" class="i-checks"></th>
 				<th class="sort-column login_name">登录名</th>
 				<th class="sort-column name">姓名</th>
-				<th class="sort-column phone">电话</th>
 				<th class="sort-column mobile">手机</th>
 				<th class="sort-column c.name">归属公司</th>
 				<th class="sort-column o.name">归属部门</th>
+				<th class="sort-column a.name">归属区域</th>
 				<th>操作</th>
 			</tr>
 		</thead>
@@ -81,10 +106,10 @@
 				<td> <input type="checkbox" id="${user.id}" class="i-checks"></td>
 				<td><a  href="#" onclick="openDialogView('查看用户', '${ctx}/sys/user/form?id=${user.id}','800px', '680px')">${user.loginName}</a></td>
 				<td>${user.name}</td>
-				<td>${user.phone}</td>
 				<td>${user.mobile}</td>
 				<td>${user.company.name}</td>
 				<td>${user.office.name}</td>
+				<td>${user.office.area.name}</td>
 				<td>
 					<shiro:hasPermission name="sys:user:view">
 						<a href="#" onclick="openDialogView('查看用户', '${ctx}/sys/user/form?id=${user.id}','800px', '680px')" class="btn btn-info btn-xs" ><i class="fa fa-search-plus"></i> 查看</a>
@@ -101,6 +126,9 @@
 		</tbody>
 	</table>
 	<table:page page="${page}"></table:page>
+	<br/>
 	</div>
+	</div>
+</div>
 </body>
 </html>

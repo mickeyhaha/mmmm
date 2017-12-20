@@ -32,7 +32,7 @@
                 <div class="ibox float-e-margins">
                      <div class="ibox-title">
                         <h5>JeePlus 技术特点</h5> 
-                        <div class="ibox-tools">
+                        <div class="ibox-tools" style="display:none">
                             <a class="collapse-link">
                                 <i class="fa fa-chevron-up"></i>
                             </a>
@@ -83,7 +83,7 @@
                 <div class="ibox float-e-margins">
                      <div class="ibox-title">
                         <h5>升级日志</h5> <span class="label label-primary">K+</span>
-                        <div class="ibox-tools">
+                        <div class="ibox-tools" style="display:none">
                             <a class="collapse-link">
                                 <i class="fa fa-chevron-up"></i>
                             </a>

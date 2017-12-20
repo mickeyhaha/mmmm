@@ -39,7 +39,7 @@ import com.jeeplus.modules.vm.service.VendingMachineService;
 /**
  * 售货机管理Controller
  * @author Jason Dong
- * @version 2017-12-19
+ * @version 2017-12-20
  */
 @Controller
 @RequestMapping(value = "${adminPath}/vm/vendingMachine")
@@ -208,8 +208,8 @@ public class VendingMachineController extends BaseController {
 		} catch (UnsupportedEncodingException e) {
 			e.printStackTrace();
 		}
-		model.addAttribute("labelNames", fieldLabels.split("-"));
-		model.addAttribute("labelValues", fieldKeys.split("-"));
+		model.addAttribute("labelNames", fieldLabels.split("\\|"));
+		model.addAttribute("labelValues", fieldKeys.split("\\|"));
 		model.addAttribute("fieldLabels", fieldLabels);
 		model.addAttribute("fieldKeys", fieldKeys);
 		model.addAttribute("url", url);

@@ -37,7 +37,7 @@
 	<div class="ibox">
 	<div class="ibox-title">
 			<h5>区域列表 </h5>
-			<div class="ibox-tools">
+			<div class="ibox-tools" style="display:none">
 				<a class="collapse-link">
 					<i class="fa fa-chevron-up"></i>
 				</a>

@@ -1,4 +1,4 @@
-package com.jeeplus.biz.enums;
+package com.holo.enums;
 
 /**
  * 客户状态

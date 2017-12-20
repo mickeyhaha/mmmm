@@ -3,6 +3,8 @@
  */
 package com.jeeplus.modules.vm.entity;
 
+import java.util.Date;
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.jeeplus.modules.vmgroup.entity.VmGroup;
 
 import com.jeeplus.common.persistence.DataEntity;
@@ -11,7 +13,7 @@ import com.jeeplus.common.utils.excel.annotation.ExcelField;
 /**
  * 售货机管理Entity
  * @author Jason Dong
- * @version 2017-12-19
+ * @version 2017-12-20
  */
 public class VendingMachine extends DataEntity<VendingMachine> {
 	
@@ -24,10 +26,10 @@ public class VendingMachine extends DataEntity<VendingMachine> {
 	private String city;		// 投放城市
 	private String area;		// 投放地区
 	private String address;		// 投放详细地址
-	private String platformState;		// 平台商状态
-	private String supplierState;		// 运营商状态
-	private String vmState;		// 售货机状态(在线，离线，停用)
-	private String createTime;		// 创建时间
+	private Integer platformState;		// 平台商状态
+	private Integer supplierState;		// 运营商状态
+	private Integer vmState;		// 售货机状态(在线，离线，停用)
+	private Date createTime;		// 创建时间
 	private String barCode;		// 二维码
 	private String standardStock;		// 标准库存
 	private VmGroup vmGroup;		// 分组编号
@@ -113,38 +115,39 @@ public class VendingMachine extends DataEntity<VendingMachine> {
 	}
 	
 	@ExcelField(title="平台商状态", align=2, sort=15)
-	public String getPlatformState() {
+	public Integer getPlatformState() {
 		return platformState;
 	}
 
-	public void setPlatformState(String platformState) {
+	public void setPlatformState(Integer platformState) {
 		this.platformState = platformState;
 	}
 	
 	@ExcelField(title="运营商状态", align=2, sort=16)
-	public String getSupplierState() {
+	public Integer getSupplierState() {
 		return supplierState;
 	}
 
-	public void setSupplierState(String supplierState) {
+	public void setSupplierState(Integer supplierState) {
 		this.supplierState = supplierState;
 	}
 	
 	@ExcelField(title="售货机状态(在线，离线，停用)", align=2, sort=17)
-	public String getVmState() {
+	public Integer getVmState() {
 		return vmState;
 	}
 
-	public void setVmState(String vmState) {
+	public void setVmState(Integer vmState) {
 		this.vmState = vmState;
 	}
 	
+	@JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
 	@ExcelField(title="创建时间", align=2, sort=18)
-	public String getCreateTime() {
+	public Date getCreateTime() {
 		return createTime;
 	}
 
-	public void setCreateTime(String createTime) {
+	public void setCreateTime(Date createTime) {
 		this.createTime = createTime;
 	}
 	

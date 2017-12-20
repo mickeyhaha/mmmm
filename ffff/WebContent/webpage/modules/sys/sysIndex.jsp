@@ -49,7 +49,7 @@
                 <ul class="nav" id="side-menu">
                     <li class="nav-header">
                         <div class="dropdown profile-element">
-                            <span><img alt="image" class="img-circle" style="height:64px;width:64px;" src="${fns:getUser().photo }" /></span>
+                            <span><img alt="image" class="img-circle" style="height:64px;width:64px;" src="${ctxStatic }/common/login/images/logo.png" /></span>              <!-- ${fns:getUser().photo } -->
                             <a data-toggle="dropdown" class="dropdown-toggle" href="#">
                                 <span class="clear">
                                <span class="block m-t-xs"><strong class="font-bold">${fns:getUser().name}</strong></span>

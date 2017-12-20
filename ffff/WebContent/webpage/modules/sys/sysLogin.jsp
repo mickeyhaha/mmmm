@@ -287,7 +287,7 @@
 													</div>
 
 													<div class="space-4"></div>
-														<div id="themeSwitch" class="dropdown">
+														<div id="themeSwitch" class="dropdown" style="display:none">
 															<a class="dropdown-toggle" data-toggle="dropdown" href="#">${fns:getDictLabel(cookie.theme.value,'theme','默认主题')}<b class="caret"></b></a>
 															<ul class="dropdown-menu">
 															  <c:forEach items="${fns:getDictList('theme')}" var="dict"><li><a href="#" onclick="location='${pageContext.request.contextPath}/theme/${dict.value}?url='+location.href"><font color="black">${dict.label}</font></a></li></c:forEach>

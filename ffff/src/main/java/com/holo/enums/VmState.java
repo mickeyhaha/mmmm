@@ -1,4 +1,4 @@
-package com.jeeplus.biz.enums;
+package com.holo.enums;
 
 /**
  * 售货机状态: 在线，离线，故障
@@ -22,5 +22,9 @@ public enum VmState {
 	@Override
 	public String toString() {
 		return state;
+	}
+	
+	public int getId() {
+		return id;
 	}
 }

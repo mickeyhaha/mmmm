@@ -77,8 +77,10 @@ public class UserController extends BaseController {
 
 	@RequiresPermissions("sys:user:index")
 	@RequestMapping(value = {"index"})
-	public String index(User user, Model model) {
-		return "modules/sys/userIndex";
+	public String index(User user, HttpServletRequest request, HttpServletResponse response, Model model) {
+		Page<User> page = systemService.findUser(new Page<User>(request, response), user);
+        model.addAttribute("page", page);
+		return "modules/sys/userList";
 	}
 
 	@RequiresPermissions("sys:user:index")

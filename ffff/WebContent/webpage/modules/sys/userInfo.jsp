@@ -132,7 +132,7 @@
 					<div class="ibox float-e-margins">
 						<div class="ibox-title">
 							<h5>个人资料</h5>
-							<div class="ibox-tools">
+							<div class="ibox-tools" style="display:none">
 								<a class="dropdown-toggle" data-toggle="dropdown" href="#">
 									编辑<i class="fa fa-wrench"></i>
 								</a>
@@ -196,7 +196,7 @@
 					<div class="ibox float-e-margins">
 						<div class="ibox-title">
 							<h5>注册信息</h5>
-							<div class="ibox-tools">
+							<div class="ibox-tools" style="display:none">
 								<a class="dropdown-toggle" data-toggle="dropdown" href="#">
 									编辑<i class="fa fa-wrench"></i>
 								</a>

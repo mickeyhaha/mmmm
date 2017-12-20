@@ -195,4 +195,14 @@
 			</otherwise>
 		</choose>
 	</select>
+	
+	<update id="updateStateByVmNos">
+		UPDATE t_vending_machine SET 
+			vm_state = #{vmState}
+		WHERE vm_no in
+        <foreach collection="vms" item="vm" index="index"
+            open="(" close=")" separator=",">
+            #{vm.vmNo}
+        </foreach>
+	</update>
 </mapper>

@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.jeeplus.modules.vmgroup.entity.VmGroup;
+import com.holo.enums.VmState;
 import com.jeeplus.common.persistence.Page;
 import com.jeeplus.common.service.CrudService;
 import com.jeeplus.modules.vm.entity.VendingMachine;
@@ -17,7 +18,7 @@ import com.jeeplus.modules.vm.dao.VendingMachineDao;
 /**
  * 售货机管理Service
  * @author Jason Dong
- * @version 2017-12-19
+ * @version 2017-12-20
  */
 @Service
 @Transactional(readOnly = true)
@@ -50,7 +51,11 @@ public class VendingMachineService extends CrudService<VendingMachineDao, Vendin
 		page.setList(dao.findListByvmGroup(vmGroup));
 		return page;
 	}
-	
-	
+
+	@Transactional(readOnly = false)
+	public void updateVmsState(List<VendingMachine> vms, int vmState) {
+		System.out.println("=======" + vms.size());
+		dao.updateStateByVmNos(vms, vmState);
+	}
 	
 }

@@ -143,7 +143,7 @@
 					${vendingMachine.vmState}
 				</td>
 				<td>
-					${vendingMachine.createTime}
+					<fmt:formatDate value="${vendingMachine.createTime}" pattern="yyyy-MM-dd HH:mm:ss"/>
 				</td>
 				<td>
 					${vendingMachine.barCode}
