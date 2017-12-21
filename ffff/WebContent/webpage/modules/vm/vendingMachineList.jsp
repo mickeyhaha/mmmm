@@ -46,7 +46,7 @@
 		<div class="form-group">
 			<span>分组编号：</span>
 				<sys:gridselect url="${ctx}/vm/vendingMachine/selectvmGroup" id="vmGroup" name="vmGroup"  value="${vendingMachine.vmGroup.id}"  title="选择分组编号" labelName="vmGroup.name" 
-					labelValue="${vendingMachine.vmGroup.name}" cssClass="form-control required" fieldLabels="ID-分组名" fieldKeys="id-name" searchLabel="分组名" searchKey="name" ></sys:gridselect>
+					labelValue="${vendingMachine.vmGroup.name}" cssClass="form-control required" fieldLabels="分组名" fieldKeys="name" searchLabel="分组名" searchKey="name" ></sys:gridselect>
 		 </div>	
 	</form:form>
 	<br/>

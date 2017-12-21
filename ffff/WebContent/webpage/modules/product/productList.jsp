@@ -44,6 +44,8 @@
 		<input id="pageSize" name="pageSize" type="hidden" value="${page.pageSize}"/>
 		<table:sortColumn id="orderBy" name="orderBy" value="${page.orderBy}" callback="sortOrRefresh();"/><!-- 支持排序 -->
 		<div class="form-group">
+			<span>货物名称：</span>
+				<form:input path="name" htmlEscape="false" maxlength="64"  class=" form-control input-sm"/>
 			<span>批次号：</span>
 				<sys:gridselect url="${ctx}/product/product/selectbatch" id="batch" name="batch"  value="${product.batch.id}"  title="选择批次号" labelName="batch.batchNo" 
 					labelValue="${product.batch.batchNo}" cssClass="form-control required" fieldLabels="批次号-生产日期" fieldKeys="batchNo-produceDate" searchLabel="批次号" searchKey="batchNo" ></sys:gridselect>
@@ -116,7 +118,7 @@
 					${product.barCode}
 				</td>
 				<td>
-					${product.}
+					${product.type}
 				</td>
 				<td>
 					${product.specification}
@@ -137,7 +139,7 @@
 					<fmt:formatDate value="${product.expireDate}" pattern="yyyy-MM-dd HH:mm:ss"/>
 				</td>
 				<td>
-					${product.type}
+					${fns:getDictLabel(product.type, 'product_type', '')}
 				</td>
 				<td>
 					<fmt:formatDate value="${product.createTime}" pattern="yyyy-MM-dd HH:mm:ss"/>

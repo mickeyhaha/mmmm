@@ -1,17 +1,14 @@
 package com.holo.enums;
 
 /**
- * 售货机中产品状态： 正常可售，不可销售
+ * 出库单状态
  * @author jason.dong
  *
  */
 public enum ProductOutState {
-	SELLABLE 		(0, "正常"),
-	SOLD			(1, "已售出"),
-	EXPIRED			(2, "已过期"),
-	EXPIRED_SOLD  	(3, "过期且售出"),
-	UN_SELLABLE 	(4, "无效");
-	
+	UN_PUBLISHED	(0, "待发布"),		// 出库单创建后的初始状态，可进行发布或撤销操作； 
+	PUBLISHED		(1, "已发布"),		// 出库单处于有效进行状态(发布后通知补货员补货)
+	CANCELLED		(2, "已取消");		// 出库单处于无效状态
 	
 	int id;
 	String state;

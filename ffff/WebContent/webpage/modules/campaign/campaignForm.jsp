@@ -31,6 +31,14 @@
 				}
 			});
 			
+					laydate({
+			            elem: '#startTime', //目标元素。由于laydate.js封装了一个轻量级的选择器引擎，因此elem还允许你传入class、tag但必须按照这种方式 '#id .class'
+			            event: 'focus' //响应事件。如果没有传入event，则按照默认的click
+			        });
+					laydate({
+			            elem: '#endTime', //目标元素。由于laydate.js封装了一个轻量级的选择器引擎，因此elem还允许你传入class、tag但必须按照这种方式 '#id .class'
+			            event: 'focus' //响应事件。如果没有传入event，则按照默认的click
+			        });
 		});
 	</script>
 </head>
@@ -47,13 +55,15 @@
 					</td>
 					<td class="width-15 active"><label class="pull-right">开始时间：</label></td>
 					<td class="width-35">
-						<form:input path="startTime" htmlEscape="false"    class="form-control "/>
+						<input id="startTime" name="startTime" type="text" maxlength="20" class="laydate-icon form-control layer-date "
+							value="<fmt:formatDate value="${campaign.startTime}" pattern="yyyy-MM-dd HH:mm:ss"/>"/>
 					</td>
 				</tr>
 				<tr>
 					<td class="width-15 active"><label class="pull-right">结束时间：</label></td>
 					<td class="width-35">
-						<form:input path="endTime" htmlEscape="false"    class="form-control "/>
+						<input id="endTime" name="endTime" type="text" maxlength="20" class="laydate-icon form-control layer-date "
+							value="<fmt:formatDate value="${campaign.endTime}" pattern="yyyy-MM-dd HH:mm:ss"/>"/>
 					</td>
 					<td class="width-15 active"><label class="pull-right">活动类型：满减，随机减，首单优惠：</label></td>
 					<td class="width-35">
@@ -77,7 +87,10 @@
 					</td>
 					<td class="width-15 active"><label class="pull-right">活动状态: 开启，结束：</label></td>
 					<td class="width-35">
-						<form:input path="state" htmlEscape="false"    class="form-control "/>
+						<form:select path="state" class="form-control ">
+							<form:option value="" label=""/>
+							<form:options items="${fns:getDictList('CampaignState')}" itemLabel="label" itemValue="value" htmlEscape="false"/>
+						</form:select>
 					</td>
 				</tr>
 				<tr>

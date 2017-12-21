@@ -37,6 +37,9 @@ public class ZkListener {
     private List<String> vmNoList = new ArrayList<String>();
 
     public void onStart()  {
+    	if(true) {
+    		return;
+    	}
     	VendingMachine vendingMachine = new VendingMachine();
     	vendingMachine.setVmState(VmState.ONLINE.getId());
 		List<VendingMachine> vmList = vendingMachineService.findList(vendingMachine);

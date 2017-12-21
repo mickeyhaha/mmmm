@@ -104,10 +104,10 @@
 					${campaign.name}
 				</a></td>
 				<td>
-					${campaign.startTime}
+					<fmt:formatDate value="${campaign.startTime}" pattern="yyyy-MM-dd HH:mm:ss"/>
 				</td>
 				<td>
-					${campaign.endTime}
+					<fmt:formatDate value="${campaign.endTime}" pattern="yyyy-MM-dd HH:mm:ss"/>
 				</td>
 				<td>
 					${campaign.type}
@@ -122,7 +122,7 @@
 					${campaign.campaignNo}
 				</td>
 				<td>
-					${campaign.state}
+					${fns:getDictLabel(campaign.state, 'CampaignState', '')}
 				</td>
 				<td>
 					${campaign.user.id}

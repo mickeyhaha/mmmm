@@ -17,7 +17,7 @@ import com.jeeplus.modules.product.dao.ProductDao;
 /**
  * 产品列表Service
  * @author Jason Dong
- * @version 2017-12-19
+ * @version 2017-12-20
  */
 @Service
 @Transactional(readOnly = true)

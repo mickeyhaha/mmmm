@@ -16,7 +16,7 @@ import com.jeeplus.modules.campaign.dao.CampaignDao;
 /**
  * 促销Service
  * @author Jason Dong
- * @version 2017-12-18
+ * @version 2017-12-20
  */
 @Service
 @Transactional(readOnly = true)

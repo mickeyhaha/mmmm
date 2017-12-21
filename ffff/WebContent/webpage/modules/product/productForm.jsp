@@ -31,6 +31,10 @@
 				}
 			});
 			
+					laydate({
+			            elem: '#expireDate', //目标元素。由于laydate.js封装了一个轻量级的选择器引擎，因此elem还允许你传入class、tag但必须按照这种方式 '#id .class'
+			            event: 'focus' //响应事件。如果没有传入event，则按照默认的click
+			        });
 		});
 	</script>
 </head>
@@ -88,19 +92,21 @@
 					</td>
 					<td class="width-15 active"><label class="pull-right">保质期：</label></td>
 					<td class="width-35">
-						<form:input path="expireDate" htmlEscape="false"    class="form-control "/>
+						<input id="expireDate" name="expireDate" type="text" maxlength="20" class="laydate-icon form-control layer-date "
+							value="<fmt:formatDate value="${product.expireDate}" pattern="yyyy-MM-dd HH:mm:ss"/>"/>
 					</td>
 				</tr>
 				<tr>
 					<td class="width-15 active"><label class="pull-right">货物类别：</label></td>
 					<td class="width-35">
-						<form:input path="type" htmlEscape="false"    class="form-control "/>
+						<form:select path="type" class="form-control ">
+							<form:option value="" label=""/>
+							<form:options items="${fns:getDictList('product_type')}" itemLabel="label" itemValue="value" htmlEscape="false"/>
+						</form:select>
 					</td>
-					<td class="width-15 active"><label class="pull-right">创建时间：</label></td>
-					<td class="width-35">
-						<form:input path="createTime" htmlEscape="false"    class="form-control "/>
-					</td>
-				</tr>
+					<td class="width-15 active"></td>
+		   			<td class="width-35" ></td>
+		  		</tr>
 		 	</tbody>
 		</table>
 	</form:form>

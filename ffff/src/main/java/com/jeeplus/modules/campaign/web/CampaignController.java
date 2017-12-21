@@ -36,7 +36,7 @@ import com.jeeplus.modules.campaign.service.CampaignService;
 /**
  * 促销Controller
  * @author Jason Dong
- * @version 2017-12-18
+ * @version 2017-12-20
  */
 @Controller
 @RequestMapping(value = "${adminPath}/campaign/campaign")

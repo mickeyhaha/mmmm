@@ -44,6 +44,9 @@
 		<include refid="productJoins"/>
 		<where>
 			a.del_flag = #{DEL_FLAG_NORMAL}
+			<if test="name != null and name != ''">
+				AND a.name = #{name}
+			</if>
 			<if test="batch != null and batch.id != null and batch.id != ''">
 				AND a.batch_id = #{batch.id}
 			</if>

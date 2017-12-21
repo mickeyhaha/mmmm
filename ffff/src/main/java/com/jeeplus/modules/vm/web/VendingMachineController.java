@@ -208,8 +208,8 @@ public class VendingMachineController extends BaseController {
 		} catch (UnsupportedEncodingException e) {
 			e.printStackTrace();
 		}
-		model.addAttribute("labelNames", fieldLabels.split("\\|"));
-		model.addAttribute("labelValues", fieldKeys.split("\\|"));
+		model.addAttribute("labelNames", fieldLabels.split("-"));
+		model.addAttribute("labelValues", fieldKeys.split("-"));
 		model.addAttribute("fieldLabels", fieldLabels);
 		model.addAttribute("fieldKeys", fieldKeys);
 		model.addAttribute("url", url);

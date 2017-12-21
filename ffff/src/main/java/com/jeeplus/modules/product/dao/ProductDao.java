@@ -12,7 +12,7 @@ import com.jeeplus.modules.product.entity.Product;
 /**
  * 产品列表DAO接口
  * @author Jason Dong
- * @version 2017-12-19
+ * @version 2017-12-20
  */
 @MyBatisDao
 public interface ProductDao extends CrudDao<Product> {

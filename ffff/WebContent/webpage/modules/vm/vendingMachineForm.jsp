@@ -114,7 +114,7 @@
 					<td class="width-15 active"><label class="pull-right">分组编号：</label></td>
 					<td class="width-35">
 						<sys:gridselect url="${ctx}/vm/vendingMachine/selectvmGroup" id="vmGroup" name="vmGroup.id"  value="${vendingMachine.vmGroup.id}"  title="选择分组编号" labelName="vmGroup.name" 
-						 labelValue="${vendingMachine.vmGroup.name}" cssClass="form-control required" fieldLabels="ID-分组名" fieldKeys="id-name" searchLabel="分组名" searchKey="name" ></sys:gridselect>
+						 labelValue="${vendingMachine.vmGroup.name}" cssClass="form-control required" fieldLabels="分组名" fieldKeys="name" searchLabel="分组名" searchKey="name" ></sys:gridselect>
 					</td>
 					<td class="width-15 active"></td>
 		   			<td class="width-35" ></td>

@@ -13,7 +13,7 @@ import com.jeeplus.common.utils.excel.annotation.ExcelField;
 /**
  * 产品列表Entity
  * @author Jason Dong
- * @version 2017-12-19
+ * @version 2017-12-20
  */
 public class Product extends DataEntity<Product> {
 	
@@ -28,7 +28,7 @@ public class Product extends DataEntity<Product> {
 	private String description;		// 商品描述
 	private String salePrice;		// 销售价
 	private Date expireDate;		// 保质期
-	private Integer type;		// 货物类别
+	private String type;		// 货物类别
 	private Date createTime;		// 创建时间
 	
 	public Product() {
@@ -130,12 +130,12 @@ public class Product extends DataEntity<Product> {
 		this.expireDate = expireDate;
 	}
 	
-	@ExcelField(title="货物类别", align=2, sort=17)
-	public Integer getType() {
+	@ExcelField(title="货物类别", dictType="product_type", align=2, sort=17)
+	public String getType() {
 		return type;
 	}
 
-	public void setType(Integer type) {
+	public void setType(String type) {
 		this.type = type;
 	}
 	
