@@ -1,0 +1,135 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.jeeplus.modules.vmlog.dao.VMLogDao">
+    
+	<sql id="vMLogColumns">
+		a.id AS "id",
+		a.create_by AS "createBy.id",
+		a.create_date AS "createDate",
+		a.update_by AS "updateBy.id",
+		a.update_date AS "updateDate",
+		a.remarks AS "remarks",
+		a.del_flag AS "delFlag",
+		a.vm_id AS "vmId",
+		a.vm_name AS "vmName",
+		a.mobile AS "mobile",
+		a.type AS "type",
+		a.open_time AS "openTime",
+		a.close_time AS "closeTime"
+	</sql>
+	
+	<sql id="vMLogJoins">
+	</sql>
+	
+    
+	<select id="get" resultType="VMLog" >
+		SELECT 
+			<include refid="vMLogColumns"/>
+		FROM t_vm_log a
+		<include refid="vMLogJoins"/>
+		WHERE a.id = #{id}
+	</select>
+	
+	<select id="findList" resultType="VMLog" >
+		SELECT 
+			<include refid="vMLogColumns"/>
+		FROM t_vm_log a
+		<include refid="vMLogJoins"/>
+		<where>
+			a.del_flag = #{DEL_FLAG_NORMAL}
+		</where>
+		<choose>
+			<when test="page !=null and page.orderBy != null and page.orderBy != ''">
+				ORDER BY ${page.orderBy}
+			</when>
+			<otherwise>
+				ORDER BY a.update_date DESC
+			</otherwise>
+		</choose>
+	</select>
+	
+	<select id="findAllList" resultType="VMLog" >
+		SELECT 
+			<include refid="vMLogColumns"/>
+		FROM t_vm_log a
+		<include refid="vMLogJoins"/>
+		<where>
+			a.del_flag = #{DEL_FLAG_NORMAL}
+		</where>		
+		<choose>
+			<when test="page !=null and page.orderBy != null and page.orderBy != ''">
+				ORDER BY ${page.orderBy}
+			</when>
+			<otherwise>
+				ORDER BY a.update_date DESC
+			</otherwise>
+		</choose>
+	</select>
+	
+	<insert id="insert">
+		INSERT INTO t_vm_log(
+			id,
+			create_by,
+			create_date,
+			update_by,
+			update_date,
+			remarks,
+			del_flag,
+			vm_id,
+			vm_name,
+			mobile,
+			type,
+			open_time,
+			close_time
+		) VALUES (
+			#{id},
+			#{createBy.id},
+			#{createDate},
+			#{updateBy.id},
+			#{updateDate},
+			#{remarks},
+			#{delFlag},
+			#{vmId},
+			#{vmName},
+			#{mobile},
+			#{type},
+			#{openTime},
+			#{closeTime}
+		)
+	</insert>
+	
+	<update id="update">
+		UPDATE t_vm_log SET 	
+			update_by = #{updateBy.id},
+			update_date = #{updateDate},
+			remarks = #{remarks},
+			vm_id = #{vmId},
+			vm_name = #{vmName},
+			mobile = #{mobile},
+			type = #{type},
+			open_time = #{openTime},
+			close_time = #{closeTime}
+		WHERE id = #{id}
+	</update>
+	
+	
+	<!--物理删除-->
+	<update id="delete">
+		DELETE FROM t_vm_log
+		WHERE id = #{id}
+	</update>
+	
+	<!--逻辑删除-->
+	<update id="deleteByLogic">
+		UPDATE t_vm_log SET 
+			del_flag = #{DEL_FLAG_DELETE}
+		WHERE id = #{id}
+	</update>
+	
+	
+	<!-- 根据实体名称和字段名称和字段值获取唯一记录 -->
+	<select id="findUniqueByProperty" resultType="VMLog" statementType="STATEMENT">
+		select * FROM t_vm_log  where ${propertyName} = '${value}'
+	</select>
+	
+</mapper>

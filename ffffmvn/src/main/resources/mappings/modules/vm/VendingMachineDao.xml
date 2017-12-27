@@ -1,0 +1,208 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.jeeplus.modules.vm.dao.VendingMachineDao">
+    
+	<sql id="vendingMachineColumns">
+		a.id AS "id",
+		a.create_by AS "createBy.id",
+		a.create_date AS "createDate",
+		a.update_by AS "updateBy.id",
+		a.update_date AS "updateDate",
+		a.remarks AS "remarks",
+		a.del_flag AS "delFlag",
+		a.vm_no AS "vmNo",
+		a.name AS "name",
+		a.type AS "type",
+		a.reader_no AS "readerNo",
+		a.province AS "province",
+		a.city AS "city",
+		a.area AS "area",
+		a.address AS "address",
+		a.platform_state AS "platformState",
+		a.supplier_state AS "supplierState",
+		a.vm_state AS "vmState",
+		a.create_time AS "createTime",
+		a.bar_code AS "barCode",
+		a.standard_stock AS "standardStock",
+		a.group_id AS "vmGroup.id",
+		vmGroup.name AS "vmGroup.name"
+	</sql>
+	
+	<sql id="vendingMachineJoins">
+		LEFT JOIN t_vm_group vmGroup ON vmGroup.id = a.group_id
+	</sql>
+	
+    
+	<select id="get" resultType="VendingMachine" >
+		SELECT 
+			<include refid="vendingMachineColumns"/>
+		FROM t_vending_machine a
+		<include refid="vendingMachineJoins"/>
+		WHERE a.id = #{id}
+	</select>
+	
+	<select id="findList" resultType="VendingMachine" >
+		SELECT 
+			<include refid="vendingMachineColumns"/>
+		FROM t_vending_machine a
+		<include refid="vendingMachineJoins"/>
+		<where>
+			a.del_flag = #{DEL_FLAG_NORMAL}
+			<if test="vmGroup != null and vmGroup.id != null and vmGroup.id != ''">
+				AND a.group_id = #{vmGroup.id}
+			</if>
+		</where>
+		<choose>
+			<when test="page !=null and page.orderBy != null and page.orderBy != ''">
+				ORDER BY ${page.orderBy}
+			</when>
+			<otherwise>
+				ORDER BY a.update_date DESC
+			</otherwise>
+		</choose>
+	</select>
+	
+	<select id="findAllList" resultType="VendingMachine" >
+		SELECT 
+			<include refid="vendingMachineColumns"/>
+		FROM t_vending_machine a
+		<include refid="vendingMachineJoins"/>
+		<where>
+			a.del_flag = #{DEL_FLAG_NORMAL}
+		</where>		
+		<choose>
+			<when test="page !=null and page.orderBy != null and page.orderBy != ''">
+				ORDER BY ${page.orderBy}
+			</when>
+			<otherwise>
+				ORDER BY a.update_date DESC
+			</otherwise>
+		</choose>
+	</select>
+	
+	<insert id="insert">
+		INSERT INTO t_vending_machine(
+			id,
+			create_by,
+			create_date,
+			update_by,
+			update_date,
+			remarks,
+			del_flag,
+			vm_no,
+			name,
+			type,
+			reader_no,
+			province,
+			city,
+			area,
+			address,
+			platform_state,
+			supplier_state,
+			vm_state,
+			create_time,
+			bar_code,
+			standard_stock,
+			group_id
+		) VALUES (
+			#{id},
+			#{createBy.id},
+			#{createDate},
+			#{updateBy.id},
+			#{updateDate},
+			#{remarks},
+			#{delFlag},
+			#{vmNo},
+			#{name},
+			#{type},
+			#{readerNo},
+			#{province},
+			#{city},
+			#{area},
+			#{address},
+			#{platformState},
+			#{supplierState},
+			#{vmState},
+			#{createTime},
+			#{barCode},
+			#{standardStock},
+			#{vmGroup.id}
+		)
+	</insert>
+	
+	<update id="update">
+		UPDATE t_vending_machine SET 	
+			update_by = #{updateBy.id},
+			update_date = #{updateDate},
+			remarks = #{remarks},
+			vm_no = #{vmNo},
+			name = #{name},
+			type = #{type},
+			reader_no = #{readerNo},
+			province = #{province},
+			city = #{city},
+			area = #{area},
+			address = #{address},
+			platform_state = #{platformState},
+			supplier_state = #{supplierState},
+			vm_state = #{vmState},
+			create_time = #{createTime},
+			bar_code = #{barCode},
+			standard_stock = #{standardStock},
+			group_id = #{vmGroup.id}
+		WHERE id = #{id}
+	</update>
+	
+	
+	<!--物理删除-->
+	<update id="delete">
+		DELETE FROM t_vending_machine
+		WHERE id = #{id}
+	</update>
+	
+	<!--逻辑删除-->
+	<update id="deleteByLogic">
+		UPDATE t_vending_machine SET 
+			del_flag = #{DEL_FLAG_DELETE}
+		WHERE id = #{id}
+	</update>
+	
+	
+	<!-- 根据实体名称和字段名称和字段值获取唯一记录 -->
+	<select id="findUniqueByProperty" resultType="VendingMachine" statementType="STATEMENT">
+		select * FROM t_vending_machine  where ${propertyName} = '${value}'
+	</select>
+	
+	<select id="findListByvmGroup" resultType="VmGroup">
+		SELECT 
+			*
+		FROM t_vm_group a
+		<where>
+			a.del_flag = #{DEL_FLAG_NORMAL}
+			<if test="name != null and name != ''">
+				AND a.name LIKE 
+				<if test="dbName == 'oracle'">#{name}||'%'</if>
+				<if test="dbName == 'mssql'">#{name}+'%'</if>
+				<if test="dbName == 'mysql'">concat(#{name},'%')</if>
+			</if>
+		</where>
+		<choose>
+			<when test="page !=null and page.orderBy != null and page.orderBy != ''">
+				ORDER BY ${page.orderBy}
+			</when>
+			<otherwise>
+				ORDER BY a.update_date DESC
+			</otherwise>
+		</choose>
+	</select>
+	
+	<update id="updateStateByVmNos">
+		UPDATE t_vending_machine SET 
+			vm_state = #{vmState}
+		WHERE vm_no in
+        <foreach collection="vms" item="vm" index="index"
+            open="(" close=")" separator=",">
+            #{vm.vmNo}
+        </foreach>
+	</update>
+</mapper>

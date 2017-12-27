@@ -1,0 +1,147 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.jeeplus.modules.campaign.dao.CampaignDao">
+    
+	<sql id="campaignColumns">
+		a.id AS "id",
+		a.create_by AS "createBy.id",
+		a.create_date AS "createDate",
+		a.update_by AS "updateBy.id",
+		a.update_date AS "updateDate",
+		a.remarks AS "remarks",
+		a.del_flag AS "delFlag",
+		a.name AS "name",
+		a.start_time AS "startTime",
+		a.end_time AS "endTime",
+		a.type AS "type",
+		a.discount AS "discount",
+		a.vm_ids AS "vendingMachine.id",
+		a.campaign_no AS "campaignNo",
+		a.state AS "state",
+		a.operator AS "user.id"
+	</sql>
+	
+	<sql id="campaignJoins">
+	</sql>
+	
+    
+	<select id="get" resultType="Campaign" >
+		SELECT 
+			<include refid="campaignColumns"/>
+		FROM t_campaign a
+		<include refid="campaignJoins"/>
+		WHERE a.id = #{id}
+	</select>
+	
+	<select id="findList" resultType="Campaign" >
+		SELECT 
+			<include refid="campaignColumns"/>
+		FROM t_campaign a
+		<include refid="campaignJoins"/>
+		<where>
+			a.del_flag = #{DEL_FLAG_NORMAL}
+		</where>
+		<choose>
+			<when test="page !=null and page.orderBy != null and page.orderBy != ''">
+				ORDER BY ${page.orderBy}
+			</when>
+			<otherwise>
+				ORDER BY a.update_date DESC
+			</otherwise>
+		</choose>
+	</select>
+	
+	<select id="findAllList" resultType="Campaign" >
+		SELECT 
+			<include refid="campaignColumns"/>
+		FROM t_campaign a
+		<include refid="campaignJoins"/>
+		<where>
+			a.del_flag = #{DEL_FLAG_NORMAL}
+		</where>		
+		<choose>
+			<when test="page !=null and page.orderBy != null and page.orderBy != ''">
+				ORDER BY ${page.orderBy}
+			</when>
+			<otherwise>
+				ORDER BY a.update_date DESC
+			</otherwise>
+		</choose>
+	</select>
+	
+	<insert id="insert">
+		INSERT INTO t_campaign(
+			id,
+			create_by,
+			create_date,
+			update_by,
+			update_date,
+			remarks,
+			del_flag,
+			name,
+			start_time,
+			end_time,
+			type,
+			discount,
+			vm_ids,
+			campaign_no,
+			state,
+			operator
+		) VALUES (
+			#{id},
+			#{createBy.id},
+			#{createDate},
+			#{updateBy.id},
+			#{updateDate},
+			#{remarks},
+			#{delFlag},
+			#{name},
+			#{startTime},
+			#{endTime},
+			#{type},
+			#{discount},
+			#{vendingMachine.id},
+			#{campaignNo},
+			#{state},
+			#{user.id}
+		)
+	</insert>
+	
+	<update id="update">
+		UPDATE t_campaign SET 	
+			update_by = #{updateBy.id},
+			update_date = #{updateDate},
+			remarks = #{remarks},
+			name = #{name},
+			start_time = #{startTime},
+			end_time = #{endTime},
+			type = #{type},
+			discount = #{discount},
+			vm_ids = #{vendingMachine.id},
+			campaign_no = #{campaignNo},
+			state = #{state},
+			operator = #{user.id}
+		WHERE id = #{id}
+	</update>
+	
+	
+	<!--物理删除-->
+	<update id="delete">
+		DELETE FROM t_campaign
+		WHERE id = #{id}
+	</update>
+	
+	<!--逻辑删除-->
+	<update id="deleteByLogic">
+		UPDATE t_campaign SET 
+			del_flag = #{DEL_FLAG_DELETE}
+		WHERE id = #{id}
+	</update>
+	
+	
+	<!-- 根据实体名称和字段名称和字段值获取唯一记录 -->
+	<select id="findUniqueByProperty" resultType="Campaign" statementType="STATEMENT">
+		select * FROM t_campaign  where ${propertyName} = '${value}'
+	</select>
+	
+</mapper>
