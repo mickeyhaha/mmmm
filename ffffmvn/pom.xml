@@ -6,7 +6,7 @@
     <groupId>jeeplusmvn</groupId>
     <artifactId>jeeplusmvn</artifactId>
     <version>0.0.1-SNAPSHOT</version>
-    <packaging>war</packaging>
+    <packaging>jar</packaging>
     <name>jeeplusmvn</name>
 
     <!-- 项目属性 -->
@@ -56,6 +56,7 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <downloadSources>true</downloadSources>
 
+        <hutool-all.version>3.1.1</hutool-all.version>
     </properties>
 
     <build>
@@ -96,6 +97,22 @@
     </build>
     <!-- 依赖项定义 -->
     <dependencies>
+    
+        <dependency>
+            <groupId>com.xiaoleilu</groupId>
+            <artifactId>hutool-all</artifactId>
+            <version>${hutool-all.version}</version>
+        </dependency>
+    	<dependency>
+		    <groupId>antbox-common</groupId>
+		    <artifactId>antbox-common</artifactId>
+		    <version>1.0.0</version>
+    	</dependency>
+    	<dependency>
+		    <groupId>antbox-domain</groupId>
+		    <artifactId>antbox-domain</artifactId>
+		    <version>1.0.0</version>
+    	</dependency>
     
 		<!-- https://mvnrepository.com/artifact/com.101tec/zkclient -->
 		<dependency>

@@ -23,15 +23,17 @@ import com.jeeplus.common.websocket.onchat.ChatServer;
 
 
 
-public class WebSockertFilter implements Filter {
+public class WebSockertFilterBak implements Filter{
 
+	
+	
 	
 	/**
 	 * 初始化
 	 */
 	public void init(FilterConfig fc) throws ServletException {
 		this.startWebsocketChatServer();
-	// 	this.startWebsocketOnline();
+	//	this.startWebsocketOnline();
 	}
 	
 	/**

@@ -20,6 +20,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
@@ -76,6 +77,7 @@ public class VendingMachineController extends BaseController {
 	 */
 	@RequiresPermissions(value={"vm:vendingMachine:view","vm:vendingMachine:add","vm:vendingMachine:edit"},logical=Logical.OR)
 	@RequestMapping(value = "form")
+	//@ResponseBody
 	public String form(VendingMachine vendingMachine, Model model) {
 		model.addAttribute("vendingMachine", vendingMachine);
 		return "modules/vm/vendingMachineForm";

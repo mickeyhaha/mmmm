@@ -1,1 +1,1 @@
-start jre\bin\javaw -jar antbox-rfid-machine.jar
+javaw -jar antbox-rfid-machine.jar
