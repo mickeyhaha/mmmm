@@ -6,7 +6,7 @@
     <groupId>jeeplusmvn</groupId>
     <artifactId>jeeplusmvn</artifactId>
     <version>0.0.1-SNAPSHOT</version>
-    <packaging>jar</packaging>
+    <packaging>war</packaging>
     <name>jeeplusmvn</name>
 
     <!-- 项目属性 -->

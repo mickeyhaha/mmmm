@@ -44,6 +44,8 @@ public class ZkListener {
     private List<String> vmNoList = new ArrayList<String>();
 
     public void onStart()  {
+    	if(true)
+    		return;
     	
     	System.out.println("start zk listener....");
     	
